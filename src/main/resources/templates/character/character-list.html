@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Character List</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th> First Name </th>
+        <th> Last Name </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${characters.empty}">
+        <td colspan="2"> No Characters Available </td>
+    </tr>
+    <tr th:each="character : ${characters}">
+        <td><span th:text="${character.firstName}"> First Name </span></td>
+        <td><span th:text="${character.lastName}"> Last Name </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

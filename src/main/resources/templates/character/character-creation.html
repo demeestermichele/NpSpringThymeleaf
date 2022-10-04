@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> Add Characters </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-info" href="#" th:href="@{/character/all}"> Back to All Books </a>
+            <form action="#" class="form-horizontal"
+                  th:action="@{/character/save}"
+                  th:object="${characters}"
+                  method="post">
+                <label>First Name<input type="text" name="firstName" id="firstName"></input></label>
+                <label>Last Name<input type="text" name="lastName" id="lastName"></input></label>
+                <input type="submit" value="Submit"></input>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

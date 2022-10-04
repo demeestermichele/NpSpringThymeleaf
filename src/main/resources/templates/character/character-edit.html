@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> Add Books </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-info" href="#" th:href="@{/character/all}"> Back to All Books </a>
+            <form action="#" class="form-horizontal"
+                  th:action="@{/character/save}"
+                  th:object="${form}"
+                  method="post">
+                <fieldset>
+					<span class="pull-right">
+						    <input type="submit" id="submitButton" class="btn btn-success" th:value="Save">
+						    <input type="reset" id="resetButton" class="btn btn-danger" th:value="Reset"/>
+					</span>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th> Title</th>
+                            <th> Author</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="character, itemStat : ${characters}">
+                            <td><input hidden th:name="|characters[${itemStat.index}].id|" th:value="${character.getId()}"/></td>
+                            <td><input th:placeholder="First Name" th:name="|characters[${itemStat.index}].firstName|" th:value="${character.getFirstName()}"
+                                       required/></td>
+                            <td><input th:placeholder="Last Name" th:name="|characters[${itemStat.index}].lastName|"
+                                       th:value="${character.getFirstName()}" required/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
