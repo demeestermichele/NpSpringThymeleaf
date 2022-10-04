@@ -7,12 +7,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1> Add Books </h1>
+            <h1> Edit Characters </h1>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <a class="btn btn-info" href="#" th:href="@{/character/all}"> Back to All Books </a>
+            <a class="btn btn-info" href="#" th:href="@{/character/all}"> Back to All characters </a>
             <form action="#" class="form-horizontal"
                   th:action="@{/character/save}"
                   th:object="${form}"
@@ -25,18 +25,18 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th></th>
-                            <th> Title</th>
-                            <th> Author</th>
+                            <th> Id </th>
+                            <th> First Name</th>
+                            <th> Last Name</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="character, itemStat : ${characters}">
-                            <td><input hidden th:name="|characters[${itemStat.index}].id|" th:value="${character.getId()}"/></td>
-                            <td><input th:placeholder="First Name" th:name="|characters[${itemStat.index}].firstName|" th:value="${character.getFirstName()}"
+                        <tr th:each="book, itemStat : ${form.characters}">
+                            <td><input th:name="|characters[${itemStat.index}].id|" th:value="${book.getId()}"/></td>
+                            <td><input th:placeholder="FirstName + ' ' + ${itemStat.count}" th:name="|characters[${itemStat.index}].firstName|" th:value="${book.getFirstName()}"
                                        required/></td>
-                            <td><input th:placeholder="Last Name" th:name="|characters[${itemStat.index}].lastName|"
-                                       th:value="${character.getFirstName()}" required/></td>
+                            <td><input th:placeholder="LastName + ' ' + ${itemStat.count}" th:name="|characters[${itemStat.index}].lastName|"
+                                       th:value="${book.getLastName()}" required/></td>
                         </tr>
                         </tbody>
                     </table>

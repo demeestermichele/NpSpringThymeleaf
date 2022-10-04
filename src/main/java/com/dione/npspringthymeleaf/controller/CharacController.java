@@ -59,6 +59,7 @@ public class CharacController {
         characRepository.saveAll(form.getCharacList());
 
         model.addAttribute("characters", characRepository.findAll());
+        System.out.println("Character " + form.getFirstName() + " " + form.getLastName() + " was created.");
 
         return "redirect:/character/character-list";
     }
