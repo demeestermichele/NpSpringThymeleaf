@@ -1,76 +1,84 @@
 package com.dione.npspringthymeleaf.controller;
 
-import com.dione.npspringthymeleaf.dto.CharacterCreationDto;
 import com.dione.npspringthymeleaf.model.Charac;
 import com.dione.npspringthymeleaf.repository.CharacRepository;
-import com.dione.npspringthymeleaf.service.CharacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/character")
 public class CharacController {
 
-    private final CharacService characService = new CharacService() {
-        @Override
-        public List<Charac> findAll() {
-            return (List<Charac>) characRepository.findAll();
-        }
-
-        @Override
-        public void saveAll(List<Charac> characs) {
-            characRepository.saveAll(characs);
-        }
-    };
 
     @Autowired
     private CharacRepository characRepository;
 
+    @GetMapping(value = "/index")
+    public String showCharacterList(Model model) {
+        model.addAttribute("characters", characRepository.findAll());
+        return "index";
+    }
+
     @GetMapping(value = "/all")
     public String showAll(Model model) {
-        model.addAttribute("characters", characService.findAll());
+        model.addAttribute("characters", characRepository.findAll());
 
         return "character/character-list";
     }
 
-    @GetMapping(value = "/create")
-    public String showCreateForm(Model model) {
-        CharacterCreationDto characterCreationDto = new CharacterCreationDto();
-        characterCreationDto.addCharac(new Charac());
-        model.addAttribute("characters", characService.findAll());
+/*    @GetMapping(value = "/create")
+    public String showCreateForm(Charac charac, Model model) {
+        characRepository.save(charac);
+        model.addAttribute("characters", characRepository.findAll());
+        return "character/character-creation";
+    }*/
+
+    @GetMapping(value = "/create") //works
+    public String showCreateForm(String firstName, String lastName, Model model) {
+        Charac charac = new Charac();
+        charac.setFirstName(firstName);
+        charac.setLastName(lastName);
+        characRepository.save(charac);
+
+        model.addAttribute("form", characRepository.findAll());
+
         return "character/character-creation";
     }
 
 
-    @GetMapping(value = "/edit")
-    public String showEditForm(Model model) {
-        List<Charac> characters = new ArrayList<>();
-        characService.findAll()
-                .iterator()
-                .forEachRemaining(characters::add);
-
-        model.addAttribute("form", new CharacterCreationDto(characters));
+    @GetMapping(value = "/edit/{id}")
+    public String showEditForm(@PathVariable("id") long id, Model model) {
+        Charac charac = characRepository.findCharacById(id);
+        model.addAttribute("character", charac);
 
         return "character/character-edit";
     }
 
-    @PostMapping(value = "/save")
-    public String saveCharac(@ModelAttribute CharacterCreationDto form, Model model) {
-        characService.saveAll(form.getCharacList());
+    @PostMapping("/update/{id}")
+    public String updateCharacter(@PathVariable("id") long id, Charac charac, Model model) {
+        characRepository.save(charac);
+        return "redirect:/index";
+    }
 
-        model.addAttribute("characters", characService.findAll());
-        System.out.println("Character " + form.toString() + "was created.");
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id, Model model) {
+        Charac charac = characRepository.findCharacById(id);
+        characRepository.delete(charac);
+        return "redirect:/index";
+    }
 
+    @PostMapping(value = "/save") //persists
+    public String saveCharac(@ModelAttribute Charac form, Model model) {
+        characRepository.save(form);
+        model.addAttribute("characters", characRepository.findAll());
+
+        System.out.println("The character called " + form.getFirstName() + " " + form.getLastName() + " has been added.");
         return "redirect:/character/all";
     }
+
+
 }
 
 

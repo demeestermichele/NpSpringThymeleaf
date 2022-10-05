@@ -15,7 +15,7 @@
             <a class="btn btn-info" href="#" th:href="@{/character/all}"> Back to All Books </a>
             <form action="#" class="form-horizontal"
                   th:action="@{/character/save}"
-                  th:object="${characters}"
+                  th:object="${form}"
                   method="post">
                 <label for="firstName" >First Name<input type="text" name="firstName" id="firstName"></input></label>
                 <label for="lastName">Last Name<input type="text" name="lastName" id="lastName"></input></label>

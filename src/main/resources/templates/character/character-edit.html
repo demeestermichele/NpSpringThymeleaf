@@ -4,45 +4,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1> Edit Characters </h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <a class="btn btn-info" href="#" th:href="@{/character/all}"> Back to All characters </a>
-            <form action="#" class="form-horizontal"
-                  th:action="@{/character/save}"
-                  th:object="${form}"
-                  method="post">
-
-					<span class="pull-right">
-						    <input type="submit" id="submitButton" class="btn btn-success" th:value="Save">
-						    <input type="reset" id="resetButton" class="btn btn-danger" th:value="Reset"/>
-					</span>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th> Id </th>
-                            <th> First Name</th>
-                            <th> Last Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="book, itemStat : ${form.characters}">
-                            <td><input hidden th:name="|books[${itemStat.index}].id|" th:value="${book.getId()}"/></td>
-                            <td><input th:placeholder="FirstName + ' ' + ${itemStat.count}" th:name="firstName" th:value="${book.getFirstName()}"
-                                       /></td>
-                            <td><input th:placeholder="LastName + ' ' + ${itemStat.count}" th:name="lastName"
-                                       th:value="${book.getLastName()}" /></td>
-                        </tr>
-                        </tbody>
-                    </table>
-            </form>
-        </div>
-    </div>
-</div>
+<form action="#"
+      th:action="@{/update/{id}(id=${charac.id})}"
+      th:object="${charac}"
+      method="post">
+    <label for="firstName">Name</label>
+    <input type="text" th:field="*{firstName}" id="firstName" placeholder="firstName">
+<!--    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>-->
+    <label for="lastName">Email</label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="lastName">
+<!--    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>-->
+    <input type="submit" value="Update Character">
+</form>
 </body>
 </html>

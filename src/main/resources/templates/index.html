@@ -21,5 +21,25 @@
 <div class="container">
     <a class="btn btn-info" href="#" th:href="@{/character/create}"> Character Creation </a>
 </div>
+<div class="container">
+    <a class="btn btn-info" href="#" th:href="@{/character/character-edit.html}"> Character edit </a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th> First Name </th>
+        <th> Last Name </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${characters.empty}">
+        <td colspan="2"> No Characters Available </td>
+    </tr>
+    <tr th:each="character : ${characters}">
+        <td><span th:text="${character.firstName}"> First Name </span></td>
+        <td><span th:text="${character.lastName}"> Last Name </span></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
