@@ -7,7 +7,10 @@ import com.dione.npspringthymeleaf.service.CharacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,28 +19,33 @@ import java.util.List;
 @RequestMapping("/character")
 public class CharacController {
 
+    private final CharacService characService = new CharacService() {
+        @Override
+        public List<Charac> findAll() {
+            return (List<Charac>) characRepository.findAll();
+        }
 
-    private CharacService characService;
+        @Override
+        public void saveAll(List<Charac> characs) {
+            characRepository.saveAll(characs);
+        }
+    };
 
     @Autowired
     private CharacRepository characRepository;
 
     @GetMapping(value = "/all")
     public String showAll(Model model) {
-        model.addAttribute("characters", characRepository.findAll());
+        model.addAttribute("characters", characService.findAll());
 
         return "character/character-list";
     }
 
     @GetMapping(value = "/create")
-    public String showCreateForm( String firstName, String lastName, Model model) {
-        Charac charac = new Charac();
-        if(charac.getId() == null) {
-            charac.setFirstName(firstName);
-            charac.setLastName(lastName);
-            characRepository.save(charac);
-            model.addAttribute("characters", characRepository.findAll());
-        }
+    public String showCreateForm(Model model) {
+        CharacterCreationDto characterCreationDto = new CharacterCreationDto();
+        characterCreationDto.addCharac(new Charac());
+        model.addAttribute("characters", characService.findAll());
         return "character/character-creation";
     }
 
@@ -56,12 +64,12 @@ public class CharacController {
 
     @PostMapping(value = "/save")
     public String saveCharac(@ModelAttribute CharacterCreationDto form, Model model) {
-        characRepository.saveAll(form.getCharacList());
+        characService.saveAll(form.getCharacList());
 
-        model.addAttribute("characters", characRepository.findAll());
-        System.out.println("Character " + form.getFirstName() + " " + form.getLastName() + " was created.");
+        model.addAttribute("characters", characService.findAll());
+        System.out.println("Character " + form.toString() + "was created.");
 
-        return "redirect:/character/character-list";
+        return "redirect:/character/all";
     }
 }
 

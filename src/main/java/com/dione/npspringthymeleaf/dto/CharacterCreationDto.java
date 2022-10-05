@@ -30,4 +30,10 @@ public class CharacterCreationDto {
         this.characters.add(charac);
     }
 
+    @Override
+    public String toString() {
+        return "CharacterCreationDto{" +
+                "characters=" + characters +
+                '}';
+    }
 }

@@ -17,7 +17,7 @@
                   th:action="@{/character/save}"
                   th:object="${form}"
                   method="post">
-                <fieldset>
+
 					<span class="pull-right">
 						    <input type="submit" id="submitButton" class="btn btn-success" th:value="Save">
 						    <input type="reset" id="resetButton" class="btn btn-danger" th:value="Reset"/>
@@ -32,15 +32,14 @@
                         </thead>
                         <tbody>
                         <tr th:each="book, itemStat : ${form.characters}">
-                            <td><input th:name="|characters[${itemStat.index}].id|" th:value="${book.getId()}"/></td>
-                            <td><input th:placeholder="FirstName + ' ' + ${itemStat.count}" th:name="|characters[${itemStat.index}].firstName|" th:value="${book.getFirstName()}"
-                                       required/></td>
-                            <td><input th:placeholder="LastName + ' ' + ${itemStat.count}" th:name="|characters[${itemStat.index}].lastName|"
-                                       th:value="${book.getLastName()}" required/></td>
+                            <td><input hidden th:name="|books[${itemStat.index}].id|" th:value="${book.getId()}"/></td>
+                            <td><input th:placeholder="FirstName + ' ' + ${itemStat.count}" th:name="firstName" th:value="${book.getFirstName()}"
+                                       /></td>
+                            <td><input th:placeholder="LastName + ' ' + ${itemStat.count}" th:name="lastName"
+                                       th:value="${book.getLastName()}" /></td>
                         </tr>
                         </tbody>
                     </table>
-                </fieldset>
             </form>
         </div>
     </div>
