@@ -16,9 +16,13 @@
     <tr th:if="${characters.empty}">
         <td colspan="2"> No Characters Available </td>
     </tr>
-    <tr th:each="character : ${characters}">
-        <td><span th:text="${character.firstName}"> First Name </span></td>
-        <td><span th:text="${character.lastName}"> Last Name </span></td>
+    <tr th:each="charac : ${characters}">
+        <td th:text="${charac.id}"></td>
+        <td th:text="${charac.firstName}"></td>
+        <td th:text="${charac.lastName}"></td>
+<!--        this works -->
+        <td><a th:href="@{/character/edit/{id}(id=${charac.id})}">Edit</a></td>
+        <td><a th:href="@{/character/delete/{id}(id=${charac.id})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

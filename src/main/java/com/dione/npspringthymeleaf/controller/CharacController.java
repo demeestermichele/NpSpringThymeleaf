@@ -5,7 +5,11 @@ import com.dione.npspringthymeleaf.repository.CharacRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.*;
 
 @Controller
 @RequestMapping("/character")
@@ -15,27 +19,34 @@ public class CharacController {
     @Autowired
     private CharacRepository characRepository;
 
-    @GetMapping(value = "/index")
-    public String showCharacterList(Model model) {
-        model.addAttribute("characters", characRepository.findAll());
-        return "index";
-    }
-
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/all") //sorted descending
     public String showAll(Model model) {
-        model.addAttribute("characters", characRepository.findAll());
+        Iterable<Charac> list = characRepository.findAll();
+        Comparator<Charac> compareId = (Charac c1, Charac c2) ->c1.getId().compareTo(c2.getId());
+        ((ArrayList<Charac>) list).sort(compareId);
+        model.addAttribute("characters", list);
 
         return "character/character-list";
     }
 
-/*    @GetMapping(value = "/create")
-    public String showCreateForm(Charac charac, Model model) {
-        characRepository.save(charac);
-        model.addAttribute("characters", characRepository.findAll());
-        return "character/character-creation";
-    }*/
+    @GetMapping(value = "/error")
+    public String errorPage(Model model) {
+        Iterable<Charac> list = characRepository.findAll();
 
-    @GetMapping(value = "/create") //works
+        model.addAttribute("characters", list);
+
+        return "redirect:/index";
+    }
+
+//FIXME why does this /create not work as it should but the one below does?
+@GetMapping(value = "/create")
+    public String showCreateForm(Charac charac, Model model) {
+    characRepository.save(charac);
+    model.addAttribute("characters", characRepository.findAll());
+    return "character/character-creation";
+}
+
+/*    @GetMapping(value = "/create") //works
     public String showCreateForm(String firstName, String lastName, Model model) {
         Charac charac = new Charac();
         charac.setFirstName(firstName);
@@ -45,28 +56,40 @@ public class CharacController {
         model.addAttribute("form", characRepository.findAll());
 
         return "character/character-creation";
+    }*/
+
+
+    @PostMapping("/update/{id}") //this works
+    public String updateCharacter(@PathVariable("id") long id, @Valid Charac character, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            character.setId(id);
+            return "error";
+        }
+
+        characRepository.save(character);
+        model.addAttribute("character", characRepository.findAll());
+        return "/character/character-profile";
     }
 
-
-    @GetMapping(value = "/edit/{id}")
-    public String showEditForm(@PathVariable("id") long id, Model model) {
-        Charac charac = characRepository.findCharacById(id);
-        model.addAttribute("character", charac);
-
+    @GetMapping("/edit/{id}")
+    public String updateForm(@PathVariable("id") long id, Model model) {
+        model.addAttribute("character", characRepository.findCharacById(id));
         return "character/character-edit";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateCharacter(@PathVariable("id") long id, Charac charac, Model model) {
-        characRepository.save(charac);
-        return "redirect:/index";
+    @GetMapping("/{id}")
+    public String characterProfile(@PathVariable("id") long id, Model model) {
+        model.addAttribute("character", characRepository.findCharacById(id));
+        return "character/character-profile";
     }
+
+
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
         Charac charac = characRepository.findCharacById(id);
         characRepository.delete(charac);
-        return "redirect:/index";
+        return "redirect:/character/all";
     }
 
     @PostMapping(value = "/save") //persists

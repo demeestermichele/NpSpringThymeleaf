@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
-public interface CharacRepository extends CrudRepository<Charac, Integer> {
+public interface CharacRepository extends CrudRepository<Charac, Long> {
     public Charac findCharacById(Long id);
     public Charac findCharactersByFirstName(String firstName);
     public Charac findCharactersByLastName(String lastName);
