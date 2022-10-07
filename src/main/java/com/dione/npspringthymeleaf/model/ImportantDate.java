@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class ImportantDates {
+public class ImportantDate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,7 +13,6 @@ public class ImportantDates {
     private Long id;
     private String name;
     private String description;
-    private Double years;
-    private Double months;
-    private Double days;
+    private CalendarType calender;
+    private EventType type;
 }

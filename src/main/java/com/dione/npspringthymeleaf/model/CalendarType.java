@@ -3,7 +3,7 @@ package com.dione.npspringthymeleaf.model;
 import javax.persistence.*;
 
 @Entity
-public class CalendarTypes {
+public class CalendarType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -19,7 +19,7 @@ public class CalendarTypes {
     private Double minutes;
     private Double seconds;
 
-    public CalendarTypes() {
+    public CalendarType() {
     }
 
     public Long getId() {
