@@ -9,7 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 @Controller
 @RequestMapping("/character")
@@ -22,7 +23,7 @@ public class CharacController {
     @GetMapping(value = "/all") //sorted descending
     public String showAll(Model model) {
         Iterable<Charac> list = characRepository.findAll();
-        Comparator<Charac> compareId = (Charac c1, Charac c2) ->c1.getId().compareTo(c2.getId());
+        Comparator<Charac> compareId = (Charac c1, Charac c2) -> c1.getId().compareTo(c2.getId());
         ((ArrayList<Charac>) list).sort(compareId);
         model.addAttribute("characters", list);
 
@@ -38,13 +39,14 @@ public class CharacController {
         return "redirect:/index";
     }
 
-//FIXME why does this /create not work as it should but the one below does?
-@GetMapping(value = "/create")
+    //FIXME why does this /create not work as it should but the one below does?
+    @GetMapping(value = "/create")
     public String showCreateForm(Charac charac, Model model) {
-    characRepository.save(charac);
-    model.addAttribute("characters", characRepository.findAll());
-    return "character/character-creation";
-}
+        charac.setId(characRepository.count());
+        characRepository.save(charac);
+        model.addAttribute("characters", characRepository.findAll());
+        return "character/character-creation";
+    }
 
 /*    @GetMapping(value = "/create") //works
     public String showCreateForm(String firstName, String lastName, Model model) {
@@ -84,7 +86,6 @@ public class CharacController {
     }
 
 
-
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
         Charac charac = characRepository.findCharacById(id);
@@ -97,6 +98,7 @@ public class CharacController {
         characRepository.save(form);
         model.addAttribute("characters", characRepository.findAll());
 
+        System.out.println(characRepository.count() + " characters in table.");
         System.out.println("The character called " + form.getFirstName() + " " + form.getLastName() + " has been added.");
         return "redirect:/character/all";
     }

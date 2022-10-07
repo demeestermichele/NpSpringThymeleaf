@@ -15,7 +15,7 @@ import java.util.Set;
 public class Charac implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String firstName;
