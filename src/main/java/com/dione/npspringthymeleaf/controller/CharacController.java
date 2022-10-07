@@ -9,7 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 @Controller
 @RequestMapping("/character")
@@ -22,7 +23,7 @@ public class CharacController {
     @GetMapping(value = "/all") //sorted descending
     public String showAll(Model model) {
         Iterable<Charac> list = characRepository.findAll();
-        Comparator<Charac> compareId = (Charac c1, Charac c2) ->c1.getId().compareTo(c2.getId());
+        Comparator<Charac> compareId = (Charac c1, Charac c2) -> c1.getId().compareTo(c2.getId());
         ((ArrayList<Charac>) list).sort(compareId);
         model.addAttribute("characters", list);
 
@@ -38,29 +39,15 @@ public class CharacController {
         return "redirect:/index";
     }
 
-//FIXME why does this /create not work as it should but the one below does?
-@GetMapping(value = "/create")
+    @GetMapping(value = "/create")
     public String showCreateForm(Charac charac, Model model) {
-    characRepository.save(charac);
-    model.addAttribute("characters", characRepository.findAll());
-    return "character/character-creation";
-}
-
-/*    @GetMapping(value = "/create") //works
-    public String showCreateForm(String firstName, String lastName, Model model) {
-        Charac charac = new Charac();
-        charac.setFirstName(firstName);
-        charac.setLastName(lastName);
         characRepository.save(charac);
-
-        model.addAttribute("form", characRepository.findAll());
-
+        model.addAttribute("characters", characRepository.findAll());
         return "character/character-creation";
-    }*/
-
+    }
 
     @PostMapping("/update/{id}") //this works
-    public String updateCharacter(@PathVariable("id") long id, @Valid Charac character, BindingResult result, Model model) {
+    public String updateCharacter(@PathVariable("id") Long id, @Valid Charac character, BindingResult result, Model model) {
         if (result.hasErrors()) {
             character.setId(id);
             return "error";
@@ -72,17 +59,16 @@ public class CharacController {
     }
 
     @GetMapping("/edit/{id}")
-    public String updateForm(@PathVariable("id") long id, Model model) {
+    public String updateForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("character", characRepository.findCharacById(id));
         return "character/character-edit";
     }
 
     @GetMapping("/{id}")
-    public String characterProfile(@PathVariable("id") long id, Model model) {
+    public String characterProfile(@PathVariable("id") Long id, Model model) {
         model.addAttribute("character", characRepository.findCharacById(id));
         return "character/character-profile";
     }
-
 
 
     @GetMapping("/delete/{id}")
