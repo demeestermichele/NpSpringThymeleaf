@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Characters</title>
+    <title>Add Books</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
@@ -14,6 +14,7 @@
 <br>
     <div class="row">
         <div class="col-md-6">
+            <a class="btn btn-info" href="#" th:href="@{/character/all}"> Back to character list </a>
             <form action="#" class="form-horizontal"
                   th:action="@{/character/save}"
                   th:object="${form}"
