@@ -66,7 +66,7 @@ public class CharacController {
         if (result.hasErrors()) {
             character.setId(id);
             System.out.println("something went wrong with update");
-            return "character/character-list";
+            return "error";
         }
 
         characRepository.save(character);
