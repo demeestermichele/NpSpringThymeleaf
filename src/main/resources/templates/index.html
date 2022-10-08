@@ -9,19 +9,29 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
+<style>
+    div {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .btn-info {
+        width: 100%;
+    }
+
+</style>
 <body>
-<div class="container">
-    <p>
-    <h3>NpSpringThymeleaf experiment with binding a List in Thymeleaf</h3>
-</div>
-<div class="container">
-    <a class="btn btn-info" href="#" th:href="@{/character/all}"> Characters List </a>
-</div>
-<div class="container">
-    <a class="btn btn-info" href="#" th:href="@{/character/create}"> Character Creation </a>
-</div>
-<div class="container">
-    <a class="btn btn-info" href="#" th:href="@{/character/edit}"> Edit character </a>
-</div>
+<table style="width: 100%">
+    <tr><td><div class="container">
+        <a class="btn btn-info" href="#" th:href="@{/character/all}"> Characters List </a>
+    </div></td></tr>
+    <tr><td><div class="container">
+        <a class="btn btn-info" href="#" th:href="@{/character/create}"> Character Creation </a>
+    </div></td></tr>
+<!--    <tr><td><div class="container">-->
+<!--        <a class="btn btn-info" href="#" th:href="@{/character/edit}"> Edit character </a>-->
+<!--    </div></td></tr>-->
+</table>
 </body>
 </html>
+
