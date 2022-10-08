@@ -65,12 +65,13 @@ public class CharacController {
     public String updateCharacter(@PathVariable("id") long id, @Valid Charac character, BindingResult result, Model model) {
         if (result.hasErrors()) {
             character.setId(id);
-            return "error";
+            System.out.println("something went wrong with update");
+            return "character/character-list";
         }
 
         characRepository.save(character);
-        model.addAttribute("character", characRepository.findAll());
-        return "/character/character-profile";
+        model.addAttribute("character", characRepository.findCharacById(id));
+        return "character/character-profile";
     }
 
     @GetMapping("/edit/{id}")
