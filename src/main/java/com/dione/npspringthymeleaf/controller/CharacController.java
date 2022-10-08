@@ -39,33 +39,49 @@ public class CharacController {
         return "redirect:/index";
     }
 
+    //FIXME why does this /create not work as it should but the one below does?
     @GetMapping(value = "/create")
     public String showCreateForm(Charac charac, Model model) {
+        charac.setId(characRepository.count());
         characRepository.save(charac);
         model.addAttribute("characters", characRepository.findAll());
         return "character/character-creation";
     }
 
+/*    @GetMapping(value = "/create") //works
+    public String showCreateForm(String firstName, String lastName, Model model) {
+        Charac charac = new Charac();
+        charac.setFirstName(firstName);
+        charac.setLastName(lastName);
+        characRepository.save(charac);
+
+        model.addAttribute("form", characRepository.findAll());
+
+        return "character/character-creation";
+    }*/
+
+
     @PostMapping("/update/{id}") //this works
-    public String updateCharacter(@PathVariable("id") Long id, @Valid Charac character, BindingResult result, Model model) {
+    public String updateCharacter(@PathVariable("id") long id, @Valid Charac character, BindingResult result, Model model) {
         if (result.hasErrors()) {
             character.setId(id);
+            System.out.println("something went wrong with update");
             return "error";
         }
 
         characRepository.save(character);
-        model.addAttribute("character", characRepository.findAll());
-        return "/character/character-profile";
+        model.addAttribute("character", characRepository.findCharacById(id));
+        return "character/character-profile";
     }
 
     @GetMapping("/edit/{id}")
-    public String updateForm(@PathVariable("id") Long id, Model model) {
+    public String updateForm(@PathVariable("id") long id, Model model) {
         model.addAttribute("character", characRepository.findCharacById(id));
         return "character/character-edit";
     }
 
     @GetMapping("/{id}")
-    public String characterProfile(@PathVariable("id") Long id, Model model) {
+    public String characterProfile(@PathVariable("id") long id, Model model) {
         model.addAttribute("character", characRepository.findCharacById(id));
         return "character/character-profile";
     }
@@ -83,6 +99,7 @@ public class CharacController {
         characRepository.save(form);
         model.addAttribute("characters", characRepository.findAll());
 
+        System.out.println(characRepository.count() + " characters in table.");
         System.out.println("The character called " + form.getFirstName() + " " + form.getLastName() + " has been added.");
         return "redirect:/character/all";
     }

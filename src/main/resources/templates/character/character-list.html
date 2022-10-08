@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Character List</title>
 </head>
 <body>
-<table>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/}">Index</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/character/all}">List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/character/create}"> Character Creation </a>
+            </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link disabled" href="/">Back</a>-->
+<!--            </li>-->
+        </ul>
+    </div>
+</nav>
+<script>
+    function rowClicked(value) {
+        location.href = "/character/" + value;
+    }
+</script>
+
+<table class="table table-hover link">
     <thead>
     <tr>
-        <th> First Name </th>
-        <th> Last Name </th>
+        <th></th>
+        <th>Name</th>
+        <th> </th>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${characters.empty}">
-        <td colspan="2"> No Characters Available </td>
+        <td colspan="2"> No Characters Available</td>
     </tr>
-    <tr th:each="charac : ${characters}">
-        <td th:text="${charac.id}"></td>
-        <td th:text="${charac.firstName}"></td>
-        <td th:text="${charac.lastName}"></td>
-<!--        this works -->
+    <tr th:each="charac : ${characters}" style="cursor: pointer"
+        th:onclick="'javascript:rowClicked(\'' + ${charac.id} + '\');'">
+        <td><a th:text="${charac.id}"></a></td>
+        <td >
+            <a th:text="${charac.firstName} + ' ' + ${charac.lastName}"></a></td>
+        <!--        this works -->
         <td><a th:href="@{/character/edit/{id}(id=${charac.id})}">Edit</a></td>
         <td><a th:href="@{/character/delete/{id}(id=${charac.id})}">Delete</a></td>
     </tr>
