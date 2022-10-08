@@ -17,6 +17,12 @@ public class CalenderTypeController {
     @Autowired
     private CalendarTypeRepository repository;
 
+    @GetMapping(value = "dashboard")
+    public String dashboard(Model model){
+        model.addAttribute("calendar", repository.findAll());
+        return "calendar/calendar-dashboard";
+    }
+
     @GetMapping(value = "all")
     public String showAll(Model model){
         model.addAttribute("calendar", repository.findAll());
