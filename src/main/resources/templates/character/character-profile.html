@@ -19,17 +19,19 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/character/all}">List</a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Back</a>
+                <a class="nav-link" href="#" th:href="@{/character/create}"> Character Creation </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="/">Back</a>
             </li>
         </ul>
     </div>
 </nav>
 <h1>
-<a th:text="${character.id}"></a>
-<a th:text="${character.firstName}"></a>
-<a th:text="${character.lastName}"></a>
+    <a th:text="${character.id}"></a>
+    <a th:text="${character.firstName}"></a>
+    <a th:text="${character.lastName}"></a>
 </h1>
 <a class="btn btn-info" href="#" th:href="@{/character/edit/{id}(id=${character.id})}"> edit </a>
 
