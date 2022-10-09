@@ -39,7 +39,7 @@ public class CharacController {
         return "redirect:/index";
     }
 
-    //FIXME why does this /create not work as it should but the one below does?
+
     @GetMapping(value = "/create")
     public String showCreateForm(Charac charac, Model model) {
         charac.setId(characRepository.count());
@@ -48,17 +48,6 @@ public class CharacController {
         return "character/character-creation";
     }
 
-/*    @GetMapping(value = "/create") //works
-    public String showCreateForm(String firstName, String lastName, Model model) {
-        Charac charac = new Charac();
-        charac.setFirstName(firstName);
-        charac.setLastName(lastName);
-        characRepository.save(charac);
-
-        model.addAttribute("form", characRepository.findAll());
-
-        return "character/character-creation";
-    }*/
 
 
     @PostMapping("/update/{id}") //this works
