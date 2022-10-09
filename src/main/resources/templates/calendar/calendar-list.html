@@ -51,6 +51,12 @@
         <td><a th:text="${item.id}"></a></td>
         <td><a th:text="${item.name}"></a></td>
         <td><a th:text="${item.description}"></a></td>
+        <td><a th:text="${item.years}"></a></td>
+        <td><a th:text="${item.months}"></a></td>
+        <td><a th:text="${item.weeks}"></a></td>
+        <td><a th:text="${item.days}"></a></td>
+        <td><a th:text="${item.hours}"></a></td>
+        <td><a th:text="${item.minutes}"></a></td>
         <!--        this works -->
         <td><a th:href="@{/calendar/edit/{id}(id=${item.id})}">Edit</a></td>
         <td><a th:href="@{/calendar/delete/{id}(id=${item.id})}">Delete</a></td>
@@ -59,3 +65,9 @@
 </table>
 </body>
 </html>
+
+
+
+
+
+
