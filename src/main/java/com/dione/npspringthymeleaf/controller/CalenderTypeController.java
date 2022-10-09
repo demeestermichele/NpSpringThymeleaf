@@ -1,6 +1,7 @@
 package com.dione.npspringthymeleaf.controller;
 
 import com.dione.npspringthymeleaf.model.CalendarType;
+import com.dione.npspringthymeleaf.model.Charac;
 import com.dione.npspringthymeleaf.repository.CalendarTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 @Controller
 @RequestMapping("/calendar")
@@ -19,20 +22,23 @@ public class CalenderTypeController {
 
     @GetMapping(value = "dashboard")
     public String dashboard(Model model){
-        model.addAttribute("calendar", repository.findAll());
+        model.addAttribute("calendars", repository.findAll());
         return "calendar/calendar-dashboard";
     }
 
     @GetMapping(value = "all")
     public String showAll(Model model){
-        model.addAttribute("calendar", repository.findAll());
+        Iterable<CalendarType> list = repository.findAll();
+        Comparator<CalendarType> compareId = (CalendarType c1, CalendarType c2) -> c1.getId().compareTo(c2.getId());
+        ((ArrayList<CalendarType>) list).sort(compareId);
+        model.addAttribute("calendars", list);
         return "calendar/calendar-list";
     }
 
     @GetMapping(value = "/create")
     public String showCreateForm(CalendarType calendar, Model model){
         repository.save(calendar);
-        model.addAttribute("calendar", repository.findAll());
+        model.addAttribute("calendars", repository.findAll());
         return "calendar/calendar-creation";
     }
 
@@ -43,7 +49,7 @@ public String updateCalendar(@PathVariable("id") Long id, @Valid CalendarType ca
             return "error";
         }
         repository.save(calendar);
-        model.addAttribute("calendar", repository.findAll());
+        model.addAttribute("calendars", repository.findAll());
         return "/calendar/calendar-profile";
     }
 
@@ -55,7 +61,7 @@ public String updateCalendar(@PathVariable("id") Long id, @Valid CalendarType ca
 
     @GetMapping("/{id}")
     public String calendarProfile(@PathVariable("id") Long id, Model model){
-        model.addAttribute("calendar", repository.findById(id));
+        model.addAttribute("calendar", repository.findCalendarTypeById(id));
         return "calendar/calendar-profile";
     }
 

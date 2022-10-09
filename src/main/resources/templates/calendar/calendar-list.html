@@ -29,5 +29,33 @@
         </ul>
     </div>
 </nav>
+<script>
+    function rowClicked(value) {
+        location.href = "/calendar/" + value;
+    }
+</script>
+<table class="table table-hover link">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${calendars.empty}">
+        <td colspan="2"> No Calendars Available</td>
+    </tr>
+    <tr th:each="item : ${calendars}"
+        th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
+        <td><a th:text="${item.id}"></a></td>
+        <td><a th:text="${item.name}"></a></td>
+        <td><a th:text="${item.description}"></a></td>
+        <!--        this works -->
+        <td><a th:href="@{/calendar/edit/{id}(id=${item.id})}">Edit</a></td>
+        <td><a th:href="@{/calendar/delete/{id}(id=${item.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
