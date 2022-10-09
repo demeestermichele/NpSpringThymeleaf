@@ -30,6 +30,8 @@
     </div>
 </nav>
 <br>
+<h1>CREATE CALENDAR</h1>
+<br>
 <div class="flex-box">
     <div class="col-md-6">
         <form action="#" class="form-horizontal"
@@ -37,9 +39,20 @@
               th:object="${form}"
               method="post">
 
-            <label for="name">Name <input type="text" name="name" id="name"></input></label>
-            <label for="description">Description <input type="text" name="description" id="description"></input></label>
-            <input type="submit" value="Submit"></input>
+            <div>
+                <div><label for="name">Name </label></div>
+                <div><input type="text" name="name" id="name"></div>
+            </div>
+            <div>
+                <div><label for="description">Description </label></div>
+                <div><input type="text" name="description" id="description"></div>
+            </div>
+            <!--            submit button-->
+            <div>
+                <br>
+                <div><input type="submit" value="Submit"></div>
+            </div>
+
         </form>
     </div>
     <div class="container">
