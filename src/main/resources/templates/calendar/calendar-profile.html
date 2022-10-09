@@ -28,36 +28,18 @@
         </ul>
     </div>
 </nav>
-<h1>
-    <a th:text="${calendar.name}"></a></h1>
+<h1><a th:text="${calendar.name}"></a></h1>
 <table style="width: 100%; flex: auto" >
-    <tr>
-        <td><a th:text="${calendar.id}"><label> ID </label></a></td>
-    </tr>
-    <tr>
-        <td><a th:text="${calendar.name}"><label> Name </label></a></td>
-    </tr>
-    <tr>
-        <td><a th:text="${calendar.description}"><label>Description </label></a></td>
-    </tr>
-    <tr>
-        <td><a th:text="${calendar.years}"><label> years </label></a></td>
-    </tr>
-    <tr>
-        <td><a th:text="${calendar.months}"><label> months </label></a></td>
-    </tr>
-    <tr>
-        <td><a th:text="${calendar.weeks}"><label> weeks </label></a></td>
-    </tr>
-    <tr>
-        <td><a th:text="${calendar.days}"><label> days </label></a></td>
-    </tr>
-    <tr>
-        <td><a th:text="${calendar.hours}"><label> hours </label></a></td>
-    </tr>
-    <tr>
-        <td><a th:text="${calendar.minutes}"><label> minutes </label></a></td>
-    </tr>
+    <tr><td><label> ID </label>                     </td><td><a th:text="${calendar.id}">            </a></td></tr>
+    <tr><td><label> Name </label>                   </td><td><a th:text="${calendar.name}">          </a></td></tr>
+    <tr><td><label> Description </label>            </td><td><a th:text="${calendar.description}">   </a></td></tr>
+    <tr><td><label> Years in one cycle </label>     </td><td><a th:text="${calendar.years}">         </a></td></tr>
+    <tr><td><label> Months in a year </label>       </td><td><a th:text="${calendar.months}">        </a></td></tr>
+    <tr><td><label> Weeks in a year </label>        </td><td><a th:text="${calendar.weeks}">         </a></td></tr>
+    <tr><td><label> Days in a year </label>         </td><td><a th:text="${calendar.days}">          </a></td></tr>
+    <tr><td><label> Hours in a day </label>         </td><td><a th:text="${calendar.hours}">         </a></td></tr>
+    <tr><td><label> Minutes in an hour </label>     </td><td><a th:text="${calendar.minutes}">       </a></td></tr>
+    <tr><td><label> Seconds in a minute </label>    </td><td><a th:text="${calendar.seconds}">       </a></td></tr>
 </table>
 <br>
 <a class="btn btn-info" href="#" th:href="@{/calendar/edit/{id}(id=${calendar.id})}"> edit </a>
