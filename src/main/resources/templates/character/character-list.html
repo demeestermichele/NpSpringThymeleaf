@@ -23,9 +23,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/character/create}"> Character Creation </a>
             </li>
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link disabled" href="/">Back</a>-->
-<!--            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/calendar/dashboard}"> Character Creation </a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -40,7 +40,7 @@
     <tr>
         <th></th>
         <th>Name</th>
-        <th> </th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -50,7 +50,7 @@
     <tr th:each="charac : ${characters}" style="cursor: pointer"
         th:onclick="'javascript:rowClicked(\'' + ${charac.id} + '\');'">
         <td><a th:text="${charac.id}"></a></td>
-        <td >
+        <td>
             <a th:text="${charac.firstName} + ' ' + ${charac.lastName}"></a></td>
         <!--        this works -->
         <td><a th:href="@{/character/edit/{id}(id=${charac.id})}">Edit</a></td>
