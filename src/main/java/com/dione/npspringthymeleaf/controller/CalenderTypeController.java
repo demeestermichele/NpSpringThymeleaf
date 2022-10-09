@@ -37,6 +37,7 @@ public class CalenderTypeController {
 
     @GetMapping(value = "/create")
     public String showCreateForm(CalendarType calendar, Model model){
+        System.out.println("trigger create");
         repository.save(calendar);
         model.addAttribute("calendars", repository.findAll());
         return "calendar/calendar-creation";
@@ -69,14 +70,15 @@ public String updateCalendar(@PathVariable("id") Long id, @Valid CalendarType ca
     public String deleteUser(@PathVariable("id") Long id, Model model){
         CalendarType calendarType = repository.findCalendarTypeById(id);
         repository.delete(calendarType);
+        System.out.println("Calendar " + calendarType.getName() + " has been deleted.");
         return "redirect:/calendar/all";
     }
 
     @PostMapping(value="/save")
     public String saveCalendar(@ModelAttribute CalendarType form, Model model){
         repository.save(form);
-        model.addAttribute("form", repository.findAll());
-        System.out.println("Calendar " + form.getName() + " has been deleted.");
+        model.addAttribute("calendars", repository.findAll());
+        System.out.println("Calendar " + form.getName() + " has been saved.");
         return "redirect:/calendar/all";
     }
 }
