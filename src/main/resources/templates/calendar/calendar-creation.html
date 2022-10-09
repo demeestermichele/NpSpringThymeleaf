@@ -10,6 +10,19 @@
 
     <title>Create Calendar</title>
 </head>
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 <body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <div class="container-fluid">
@@ -38,28 +51,62 @@
               th:action="@{/calendar/save}"
               th:object="${form}"
               method="post">
-
+            <!--            name -->
             <div>
                 <div><label for="name">Name </label></div>
                 <div><input type="text" name="name" id="name"></div>
             </div>
+            <!--            Description-->
             <div>
                 <div><label for="description">Description </label></div>
                 <div><input type="text" name="description" id="description"></div>
             </div>
+            <!--            years-->
+            <div>
+                <div><label for="years">years </label></div>
+                <div><input type="number" name="years" id="years"></div>
+            </div>
+            <!--            months-->
+            <div>
+                <div><label for="months">months </label></div>
+                <div><input type="number" name="months" id="months"></div>
+            </div>
+            <!--            weeks-->
+            <div>
+                <div><label for="weeks">weeks </label></div>
+                <div><input type="number" name="weeks" id="weeks"></div>
+            </div>
+            <!--            days-->
+            <div>
+                <div><label for="days">days </label></div>
+                <div><input type="number" name="days" id="days"></div>
+            </div>
+            <!--            hours-->
+            <div>
+                <div><label for="hours">hours </label></div>
+                <div><input type="number" name="hours" id="hours"></div>
+            </div>
+            <!--            minutes-->
+            <div>
+                <div><label for="minutes">minutes </label></div>
+                <div><input type="number" name="minutes" id="minutes"></div>
+            </div>
+            <!--            seconds-->
+            <div>
+                <div><label for="seconds">seconds </label></div>
+                <div><input type="number" name="seconds" id="seconds"></div>
+            </div>
+
             <!--            submit button-->
             <div>
                 <br>
                 <div><input type="submit" value="Submit"></div>
             </div>
-
         </form>
     </div>
     <div class="container">
         <a class="btn btn-info" href="#" th:href="@{/calendar/all}">Calendars </a>
     </div>
 </div>
-
-
 </body>
 </html>

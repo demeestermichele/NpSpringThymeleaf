@@ -8,6 +8,19 @@
     <meta name="author" content="">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -28,23 +41,63 @@
         </ul>
     </div>
 </nav>
-
-<h1 th:text="${calendar.name}"></h1>
-
+<header><h1 th:text="${calendar.name}"></h1></header>
 <form action="#"
       th:action="@{/calendar/update/{id}(id=${calendar.id})}"
       th:object="${calendar}"
       method="post">
     <div class="row">
         <div class="form-group col-md-6">
+<!--            name-->
             <label for="name" class="col-form-label">Name</label>
             <input class="form-control" type="text" id="name" placeholder="name" th:field="*{name}"
                    name="name">
             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+<!--            description-->
             <label for="description" class="col-form-label">Description</label>
             <input class="form-control" type="text" id="description" placeholder="description" th:field="*{description}"
                    name="description">
             <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+<!--            years-->
+            <label for="years" class="col-form-label">years</label>
+            <input class="form-control" type="number" id="years" placeholder="years" th:field="*{years}"
+                   name="years">
+            <span th:if="${#fields.hasErrors('years')}" th:errors="*{years}"></span>
+<!--            months-->
+            <label for="months" class="col-form-label">months</label>
+            <input class="form-control" type="number" id="months" placeholder="months" th:field="*{months}"
+                   name="months">
+            <span th:if="${#fields.hasErrors('months')}" th:errors="*{months}"></span>
+<!--            weeks-->
+            <label for="weeks" class="col-form-label">weeks</label>
+            <input class="form-control" type="number" id="weeks" placeholder="weeks" th:field="*{weeks}"
+                   name="weeks">
+            <span th:if="${#fields.hasErrors('weeks')}" th:errors="*{weeks}"></span>
+<!--            days-->
+            <label for="days" class="col-form-label">days</label>
+            <input class="form-control" type="number" id="days" placeholder="days" th:field="*{days}"
+                   name="days">
+            <span th:if="${#fields.hasErrors('days')}" th:errors="*{days}"></span>
+<!--            hours-->
+            <label for="hours" class="col-form-label">hours</label>
+            <input class="form-control" type="number" id="hours" placeholder="hours" th:field="*{hours}"
+                   name="hours">
+            <span th:if="${#fields.hasErrors('hours')}" th:errors="*{hours}"></span>
+<!--            minutes-->
+            <label for="minutes" class="col-form-label">minutes</label>
+            <input class="form-control" type="number" id="minutes" placeholder="minutes" th:field="*{minutes}"
+                   name="minutes">
+            <span th:if="${#fields.hasErrors('minutes')}" th:errors="*{minutes}"></span>
+<!--            seconds-->
+            <label for="seconds" class="col-form-label">seconds</label>
+            <input class="form-control" type="number" id="seconds" placeholder="seconds" th:field="*{seconds}"
+                   name="seconds">
+            <span th:if="${#fields.hasErrors('seconds')}" th:errors="*{seconds}"></span>
+
+
+
+
+<!--            submit-->
             <div class="row">
                 <div class="col-md-6 mt-5">
                     <input type="submit" class="btn btn-primary" value="Update Calendar">

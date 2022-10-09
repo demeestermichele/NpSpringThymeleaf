@@ -41,10 +41,10 @@ public class CharacController {
 
 
     @GetMapping(value = "/create")
-    public String showCreateForm(Charac charac, Model model) {
-        charac.setId(characRepository.count());
-        characRepository.save(charac);
-        model.addAttribute("characters", characRepository.findAll());
+    public String showCreateForm(Model model) {
+        Charac charac = new Charac();
+        System.out.println("CREATE CHARACTER");
+        model.addAttribute("characters", charac);
         return "character/character-creation";
     }
 
@@ -86,7 +86,7 @@ public class CharacController {
     @PostMapping(value = "/save") //persists
     public String saveCharac(@ModelAttribute Charac form, Model model) {
         characRepository.save(form);
-        model.addAttribute("characters", characRepository.findAll());
+        model.addAttribute("character", characRepository.findCharacById(form.getId()));
 
         System.out.println(characRepository.count() + " characters in table.");
         System.out.println("The character called " + form.getFirstName() + " " + form.getLastName() + " has been added.");
