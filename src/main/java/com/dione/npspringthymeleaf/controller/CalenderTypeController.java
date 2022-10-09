@@ -50,13 +50,13 @@ public String updateCalendar(@PathVariable("id") Long id, @Valid CalendarType ca
             return "error";
         }
         repository.save(calendar);
-        model.addAttribute("calendars", repository.findAll());
+        model.addAttribute("calendar", repository.findCalendarTypeById(id));
         return "/calendar/calendar-profile";
     }
 
     @GetMapping("/edit/{id}")
     public String updateForm(@PathVariable("id") Long id, Model model){
-        model.addAttribute("calendar", repository.findById(id));
+        model.addAttribute("calendar", repository.findCalendarTypeById(id));
         return "calendar/calendar-edit";
     }
 

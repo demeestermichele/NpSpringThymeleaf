@@ -9,6 +9,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
+<body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <div class="container-fluid">
         <ul class="navbar-nav">
@@ -28,8 +29,30 @@
     </div>
 </nav>
 
-<body>
+<h1 th:text="${calendar.name}"></h1>
+
+<form action="#"
+      th:action="@{/calendar/update/{id}(id=${calendar.id})}"
+      th:object="${calendar}"
+      method="post">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="name" class="col-form-label">Name</label>
+            <input class="form-control" type="text" id="name" placeholder="name" th:field="*{name}"
+                   name="name">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            <label for="description" class="col-form-label">Description</label>
+            <input class="form-control" type="text" id="description" placeholder="description" th:field="*{description}"
+                   name="description">
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+            <div class="row">
+                <div class="col-md-6 mt-5">
+                    <input type="submit" class="btn btn-primary" value="Update Calendar">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 </body>
 </html>
-
