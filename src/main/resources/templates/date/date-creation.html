@@ -6,7 +6,7 @@
     <meta name="author" content="">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <title>Profile</title>
+    <title>Event Creation</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -30,5 +30,71 @@
         </ul>
     </div>
 </nav>
+<br>
+<h1>CREATE EVENT</h1>
+<br>
+<div class="flex-box">
+    <div class="col-md-6">
+        <form action="#" class="form-horizontal"
+              th:action="@{/date/save}"
+              th:object="${form}"
+              method="post">
+            <!--            name -->
+            <div>
+                <div><label for="name">Name </label></div>
+                <div><input type="text" name="name" id="name"></div>
+            </div>
+            <!--            Description-->
+            <div>
+                <div><label for="description">Description </label></div>
+                <div><input type="text" name="description" id="description"></div>
+            </div>
+            <!--            years-->
+            <div>
+                <div><label for="years">years </label></div>
+                <div><input type="number" name="years" id="years"></div>
+            </div>
+            <!--            months-->
+            <div>
+                <div><label for="months">months </label></div>
+                <div><input type="number" name="months" id="months"></div>
+            </div>
+            <!--            weeks-->
+            <div>
+                <div><label for="weeks">weeks </label></div>
+                <div><input type="number" name="weeks" id="weeks"></div>
+            </div>
+            <!--            days-->
+            <div>
+                <div><label for="days">days </label></div>
+                <div><input type="number" name="days" id="days"></div>
+            </div>
+            <!--            hours-->
+            <div>
+                <div><label for="hours">hours </label></div>
+                <div><input type="number" name="hours" id="hours"></div>
+            </div>
+            <!--            minutes-->
+            <div>
+                <div><label for="minutes">minutes </label></div>
+                <div><input type="number" name="minutes" id="minutes"></div>
+            </div>
+            <!--            seconds-->
+            <div>
+                <div><label for="seconds">seconds </label></div>
+                <div><input type="number" name="seconds" id="seconds"></div>
+            </div>
+
+            <!--            submit button-->
+            <div>
+                <br>
+                <div><input type="submit" value="Submit"></div>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <a class="btn btn-info" href="#" th:href="@{/date/all}">Events </a>
+    </div>
+</div>
 </body>
 </html>

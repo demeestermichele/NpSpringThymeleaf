@@ -6,7 +6,7 @@
     <meta name="author" content="">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <title>Profile</title>
+    <title>Events Dashboard</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -30,5 +30,21 @@
         </ul>
     </div>
 </nav>
+
+
+<table style="width: 100%">
+    <tr><td><div class="container">
+        <h1>EVENTS</h1></div></td></tr>
+    <tr><td><div class="container">
+        <a class="btn btn-primary btn-lg btn-block"  href="#" th:href="@{/date/all}"> Events List </a>
+    </div></td></tr>
+    <tr><td><div class="container">
+        <a class="btn btn-primary btn-lg btn-block" href="#" th:href="@{/date/create}"> Events Creation </a>
+    </div></td></tr>
+    <tr><td><div class="container">
+        <a class="btn btn-primary btn-lg btn-block"  href="#" th:href="@{/}"> Home </a>
+    </div></td></tr>
+
+</table>
 </body>
 </html>

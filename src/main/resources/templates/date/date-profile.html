@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <title>Event Profile</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/}">Index</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/character/all}">List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/character/create}"> Character Creation </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/calendar/dashboard}"> Calendar </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/date/dashboard}"> Events </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h1><a th:text="${date.name}"></a></h1>
+<table style="width: 100%; flex: auto" >
+    <tr hidden><td><label> ID </label>                     </td><td><a th:text="${date.id}">            </a></td></tr>
+    <tr><td><label> Name </label>                   </td><td><a th:text="${date.name}">          </a></td></tr>
+    <tr><td><label> Description </label>            </td><td><a th:text="${date.description}">   </a></td></tr>
+    <tr><td><label> Years in one cycle </label>     </td><td><a th:text="${date.years}">         </a></td></tr>
+    <tr><td><label> Months in a year </label>       </td><td><a th:text="${date.months}">        </a></td></tr>
+    <tr><td><label> Weeks in a year </label>        </td><td><a th:text="${date.weeks}">         </a></td></tr>
+    <tr><td><label> Days in a year </label>         </td><td><a th:text="${date.days}">          </a></td></tr>
+    <tr><td><label> Hours in a day </label>         </td><td><a th:text="${date.hours}">         </a></td></tr>
+    <tr><td><label> Minutes in an hour </label>     </td><td><a th:text="${date.minutes}">       </a></td></tr>
+    <tr><td><label> Seconds in a minute </label>    </td><td><a th:text="${date.seconds}">       </a></td></tr>
+</table>
+<br>
+<a class="btn btn-info" href="#" th:href="@{/date/edit/{id}(id=${date.id})}"> edit </a>
+
+
+</body>
+</html>
