@@ -3,6 +3,7 @@ package com.dione.npspringthymeleaf.model;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class CalendarType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
