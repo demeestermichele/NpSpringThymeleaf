@@ -23,17 +23,17 @@ public class EventDateController {
     @Autowired
     private CalendarTypeRepository calendarTypeRepository;
 
-    @GetMapping(value = "dashboard")
+    @GetMapping(value = "/dashboard")
     public String dashboard(Model model){
         model.addAttribute("dates", repository.findAll());
         return "date/date-dashboard";
     }
 
-    @GetMapping(value = "all")
+    @GetMapping(value = "/all")
     public String showAll(Model model){
         Iterable<EventDate> list = repository.findAll();
-        Comparator<EventDate> compareId = (EventDate c1, EventDate c2) -> c1.getId().compareTo(c2.getId());
-        ((ArrayList<EventDate>) list).sort(compareId);
+//        Comparator<EventDate> compareId = (EventDate c1, EventDate c2) -> c1.getId().compareTo(c2.getId());
+//        ((ArrayList<EventDate>) list).sort(compareId);
         model.addAttribute("dates", list);
         return "date/date-list";
     }
@@ -86,4 +86,5 @@ public class EventDateController {
         return "redirect:/date/all";
 
     }
+
 }

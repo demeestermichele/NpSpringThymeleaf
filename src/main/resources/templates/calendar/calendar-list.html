@@ -34,14 +34,14 @@
 </nav>
 <script>
     function rowClicked(value) {
-        location.href = "/calendar/" + value;
+        location.href = "/calendar/year/" + value;
     }
 </script>
 <table class="table table-hover link">
     <thead>
     <tr>
         <th></th>
-        <th>All Calendars</th>
+        <th>All Events</th>
         <th></th>
     </tr>
     </thead>
@@ -50,11 +50,11 @@
         <td colspan="2"> No Calendars Available</td>
     </tr>
     <tr th:each="item : ${calendars}"
-        th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
-        <td><a th:text="${item.id}"></a></td>
+        th:onclick="'javascript:rowClicked(\'' + ${item.years} + '\');'">
+<!--                <td><a th:text="${item.id}"></a></td>-->
+        <td><a th:text="${item.years}"></a></td>
         <td><a th:text="${item.name}"></a></td>
         <td><a th:text="${item.description}"></a></td>
-        <td><a th:text="${item.years}"></a></td>
         <td><a th:text="${item.months}"></a></td>
         <td><a th:text="${item.weeks}"></a></td>
         <td><a th:text="${item.days}"></a></td>

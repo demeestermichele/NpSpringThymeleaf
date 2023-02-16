@@ -14,7 +14,7 @@ import java.util.Comparator;
 
 @Controller
 @RequestMapping("/calendar")
-public class CalenderTypeController {
+public class CalendarTypeController {
 
     @Autowired
     private CalendarTypeRepository repository;
@@ -31,6 +31,7 @@ public class CalenderTypeController {
         Comparator<CalendarType> compareId = (CalendarType c1, CalendarType c2) -> c1.getId().compareTo(c2.getId());
         ((ArrayList<CalendarType>) list).sort(compareId);
         model.addAttribute("calendars", list);
+        System.out.println();
         return "calendar/calendar-list";
     }
 
@@ -64,6 +65,12 @@ public class CalenderTypeController {
     public String calendarProfile(@PathVariable("id") Long id, Model model) {
         model.addAttribute("calendar", repository.findCalendarTypeById(id));
         return "calendar/calendar-profile";
+    }
+
+    @GetMapping("/year/{year}")
+    public String calendarProfile(@PathVariable("year") Integer year, Model model) {
+        model.addAttribute("events", repository.findCalendarTypesByYears(year));
+        return "calendar/calendar-year";
     }
 
     @GetMapping("/delete/{id}")

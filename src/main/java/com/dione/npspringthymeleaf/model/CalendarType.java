@@ -12,15 +12,36 @@ public class CalendarType {
 
     private String name;
     private String description;
-    private Double years;
-    private Double months;
-    private Double weeks;
-    private Double days;
-    private Double hours;
-    private Double minutes;
-    private Double seconds;
+    private Integer years;
+    private Integer months;
+
+    @Column(nullable = true)
+    private Integer weeks;
+    private Integer days;
+
+    @Column(nullable = true)
+    private Integer hours;
+
+    @Column(nullable = true)
+    private Integer minutes;
+
+    @Column(nullable = true)
+    private Integer seconds;
 
     public CalendarType() {
+    }
+
+    public CalendarType(Integer years, Integer months, Integer days) {
+        this.years = years;
+        this.months = months;
+        this.days = days;
+    }
+
+    public CalendarType(Integer years, Integer months, Integer days, Integer hours) {
+        this.years = years;
+        this.months = months;
+        this.days = days;
+        this.hours = hours;
     }
 
     public Long getId() {
@@ -47,59 +68,75 @@ public class CalendarType {
         this.description = description;
     }
 
-    public Double getYears() {
+    public Integer getYears() {
         return years;
     }
 
-    public void setYears(Double years) {
+    public void setYears(Integer years) {
         this.years = years;
     }
 
-    public Double getMonths() {
+    public Integer getMonths() {
         return months;
     }
 
-    public void setMonths(Double months) {
+    public void setMonths(Integer months) {
         this.months = months;
     }
 
-    public Double getWeeks() {
+    public Integer getWeeks() {
         return weeks;
     }
 
-    public void setWeeks(Double weeks) {
+    public void setWeeks(Integer weeks) {
         this.weeks = weeks;
     }
 
-    public Double getDays() {
+    public Integer getDays() {
         return days;
     }
 
-    public void setDays(Double days) {
+    public void setDays(Integer days) {
         this.days = days;
     }
 
-    public Double getHours() {
+    public Integer getHours() {
         return hours;
     }
 
-    public void setHours(Double hours) {
+    public void setHours(Integer hours) {
         this.hours = hours;
     }
 
-    public Double getMinutes() {
+    public Integer getMinutes() {
         return minutes;
     }
 
-    public void setMinutes(Double minutes) {
+    public void setMinutes(Integer minutes) {
         this.minutes = minutes;
     }
 
-    public Double getSeconds() {
+    public Integer getSeconds() {
         return seconds;
     }
 
-    public void setSeconds(Double seconds) {
+    public void setSeconds(Integer seconds) {
         this.seconds = seconds;
+    }
+
+    @Override
+    public String toString() {
+        return "CalendarType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", years=" + years +
+                ", months=" + months +
+                ", weeks=" + weeks +
+                ", days=" + days +
+                ", hours=" + hours +
+                ", minutes=" + minutes +
+                ", seconds=" + seconds +
+                '}';
     }
 }
