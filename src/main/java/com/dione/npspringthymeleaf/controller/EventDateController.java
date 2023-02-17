@@ -4,14 +4,17 @@ import com.dione.npspringthymeleaf.model.EventDate;
 import com.dione.npspringthymeleaf.repository.CalendarTypeRepository;
 import com.dione.npspringthymeleaf.repository.EventDateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.expression.Strings;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.List;
+
+import static org.thymeleaf.util.StringUtils.capitalize;
 
 @Controller
 @RequestMapping("/date")
@@ -23,17 +26,30 @@ public class EventDateController {
     @Autowired
     private CalendarTypeRepository calendarTypeRepository;
 
+    public Strings strings;
+
+
     @GetMapping(value = "/dashboard")
-    public String dashboard(Model model){
+    public String dashboard(Model model) {
         model.addAttribute("dates", repository.findAll());
         return "date/date-dashboard";
     }
 
+    /***
+     * Gets all events sorted chronologically through date "shortForm"
+     * @param model
+     * @param year
+     * @param page
+     * @param size
+     * @param sort
+     * @return
+     */
     @GetMapping(value = "/all")
-    public String showAll(Model model){
-        Iterable<EventDate> list = repository.findAll();
-//        Comparator<EventDate> compareId = (EventDate c1, EventDate c2) -> c1.getId().compareTo(c2.getId());
-//        ((ArrayList<EventDate>) list).sort(compareId);
+    public String showAll(Model model, @RequestParam(required = false) Integer year,
+                          @RequestParam(defaultValue = "1") int page,
+                          @RequestParam(defaultValue = "6") int size,
+                          @RequestParam(defaultValue = "id,asc") String[] sort) {
+        List<EventDate> list = repository.findAll(Sort.by("shortForm"));
         model.addAttribute("dates", list);
         return "date/date-list";
     }
@@ -66,7 +82,10 @@ public class EventDateController {
 
     @GetMapping("/{id}")
     public String eventProfile(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("date", repository.getDateById(id));
+        EventDate eventId = repository.getDateById(id);
+        String strings = repository.getDateById(id).getType().toString().toLowerCase();
+        model.addAttribute("type", capitalize(strings));
+        model.addAttribute("date", eventId);
         return "date/date-profile";
     }
 

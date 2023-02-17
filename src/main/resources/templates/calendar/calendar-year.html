@@ -49,7 +49,7 @@
     </tr>
     <tr th:each="item : ${events}"
         th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
-        <td><a th:text="${item.id}"></a></td>
+<!--        <td><a th:text="${item.id}"></a></td>-->
         <td><a th:text="${item.years}"></a></td>
         <td><a th:text="${item.name}"></a></td>
         <td><a th:text="${item.description}"></a></td>

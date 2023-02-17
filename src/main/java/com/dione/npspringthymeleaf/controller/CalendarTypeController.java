@@ -3,14 +3,16 @@ package com.dione.npspringthymeleaf.controller;
 import com.dione.npspringthymeleaf.model.CalendarType;
 import com.dione.npspringthymeleaf.repository.CalendarTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.List;
 
 @Controller
 @RequestMapping("/calendar")
@@ -26,12 +28,44 @@ public class CalendarTypeController {
     }
 
     @GetMapping(value = "all")
-    public String showAll(Model model) {
-        Iterable<CalendarType> list = repository.findAll();
-        Comparator<CalendarType> compareId = (CalendarType c1, CalendarType c2) -> c1.getId().compareTo(c2.getId());
-        ((ArrayList<CalendarType>) list).sort(compareId);
+    public String showAll(Model model, @RequestParam(required = false) Integer year,
+                          @RequestParam(defaultValue = "1") int page,
+                          @RequestParam(defaultValue = "6") int size,
+                          @RequestParam(defaultValue = "id,asc") String[] sort) {
+        List<CalendarType> list = repository.findAll(Sort.by("years"));
         model.addAttribute("calendars", list);
-        System.out.println();
+
+/*        try {
+            List<CalendarType> types = new ArrayList<CalendarType>();
+
+            String sortField = sort[0];
+            String sortDirection = sort[1];
+
+            Sort.Direction direction = sortDirection.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+            Sort.Order order = new Sort.Order(direction, sortField);
+
+            Pageable pageable = PageRequest.of(page - 1, size, Sort.by(order));
+
+            Page<CalendarType> calendarTypePage;
+
+            if (year == null) {
+                calendarTypePage = repository.findAll(pageable);
+
+            } else {
+                calendarTypePage = repository.findCalendarTypesByYears(year, pageable);
+                model.addAttribute("years", year);
+
+            }
+types = calendarTypePage.getContent();
+
+
+            Comparator<CalendarType> compareId = (CalendarType c1, CalendarType c2) -> c1.getId().compareTo(c2.getId());
+            ((ArrayList<CalendarType>) list).sort(compareId);
+            model.addAttribute("calendars", list);
+            System.out.println();
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
+        }*/
         return "calendar/calendar-list";
     }
 
@@ -68,8 +102,11 @@ public class CalendarTypeController {
     }
 
     @GetMapping("/year/{year}")
-    public String calendarProfile(@PathVariable("year") Integer year, Model model) {
-        model.addAttribute("events", repository.findCalendarTypesByYears(year));
+    public String calendarProfile(@PathVariable("year") Integer year, Model model, @RequestParam(defaultValue = "1") int page,
+                                  @RequestParam(defaultValue = "6") int size,
+                                  @RequestParam(defaultValue = "id,asc") String[] sort) {
+        List<CalendarType> list = repository.findAllByYearsOrderByMonths(year);
+        model.addAttribute("events", list);
         return "calendar/calendar-year";
     }
 
