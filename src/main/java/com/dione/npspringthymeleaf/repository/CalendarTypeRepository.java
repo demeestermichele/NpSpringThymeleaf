@@ -10,6 +10,7 @@ public interface CalendarTypeRepository extends JpaRepository<CalendarType, Long
 
     //findById in CrudRepo gives Optional
     CalendarType findCalendarTypeById(Long id);
+    List<CalendarType> findAllByYears(Integer years);
     Page<CalendarType> findCalendarTypesByYears(Integer years, Pageable pageable);
     Iterable<CalendarType> findCalendarTypesByYears(Integer years);
     List<CalendarType> findAllByYearsOrderByMonths(Integer years);

@@ -32,7 +32,9 @@ public class CalendarTypeController {
                           @RequestParam(defaultValue = "1") int page,
                           @RequestParam(defaultValue = "6") int size,
                           @RequestParam(defaultValue = "id,asc") String[] sort) {
-        List<CalendarType> list = repository.findAll(Sort.by("years"));
+
+        List<CalendarType> list = repository.findAllByYearsOrderByMonths(year);
+        //findAll results in finding CalendarType and all events, because it's an extension.
         model.addAttribute("calendars", list);
 
 /*        try {
@@ -101,14 +103,6 @@ types = calendarTypePage.getContent();
         return "calendar/calendar-profile";
     }
 
-    @GetMapping("/year/{year}")
-    public String calendarProfile(@PathVariable("year") Integer year, Model model, @RequestParam(defaultValue = "1") int page,
-                                  @RequestParam(defaultValue = "6") int size,
-                                  @RequestParam(defaultValue = "id,asc") String[] sort) {
-        List<CalendarType> list = repository.findAllByYearsOrderByMonths(year);
-        model.addAttribute("events", list);
-        return "calendar/calendar-year";
-    }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model) {

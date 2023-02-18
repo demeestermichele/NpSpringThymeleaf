@@ -53,7 +53,7 @@
 
 <script>
     function rowClicked(value) {
-        location.href = "/date/" + value;
+        location.href = "/date/year/" + value;
     }
     function sortTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -133,7 +133,7 @@
         <td colspan="2"> No Events Available</td>
     </tr>
     <tr th:each="item : ${dates}"
-        th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
+        th:onclick="'javascript:rowClicked(\'' + ${item.years} + '\');'">
         <td><a hidden th:text="${item.id}"></a></td>
         <td><a th:text="${item.shortForm}"></a></td>
         <td><a th:text="${item.name}"></a></td>

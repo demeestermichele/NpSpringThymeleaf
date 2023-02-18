@@ -31,7 +31,7 @@
     </div>
 </nav>
 
-<h1><a th:text="${type} + ' of ' + ${date.name}"></a></h1>
+<h1><a th:text="${type} + ${date.name}"></a></h1>
 <table style="width: 100%; flex: auto" >
     <tr hidden><td><label> ID </label>                     </td><td><a th:text="${date.id}">            </a></td></tr>
     <tr><td><label> Name </label>                   </td><td><a th:text="${date.name}">          </a></td></tr>

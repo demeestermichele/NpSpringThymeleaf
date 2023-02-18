@@ -34,14 +34,18 @@
 </nav>
 <script>
     function rowClicked(value) {
-        location.href = "/calendar/year/" + value;
+        if (value !== "null"){
+        location.href = "/calendar/" + value;
+        } else {
+            location.href ="/calendar/create/"
+        }
     }
 </script>
 <table class="table table-hover link">
     <thead>
     <tr>
         <th></th>
-        <th>All Events</th>
+        <th>All Calendars</th>
         <th></th>
     </tr>
     </thead>
@@ -50,8 +54,8 @@
         <td colspan="2"> No Calendars Available</td>
     </tr>
     <tr th:each="item : ${calendars}"
-        th:onclick="'javascript:rowClicked(\'' + ${item.years} + '\');'">
-<!--                <td><a th:text="${item.id}"></a></td>-->
+        th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
+                <td><a th:text="${item.id}"></a></td>
         <td><a th:text="${item.years}"></a></td>
         <td><a th:text="${item.name}"></a></td>
         <td><a th:text="${item.description}"></a></td>
@@ -61,8 +65,8 @@
         <td><a th:text="${item.hours}"></a></td>
         <td><a th:text="${item.minutes}"></a></td>
         <!--        this works -->
-        <td><a th:href="@{/date/edit/{id}(id=${item.id})}">Edit</a></td>
-        <td><a th:href="@{/date/delete/{id}(id=${item.id})}">Delete</a></td>
+        <td><a th:href="@{/calendar/edit/{id}(id=${item.id})}">Edit</a></td>
+        <td><a th:href="@{/calendar/delete/{id}(id=${item.id})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

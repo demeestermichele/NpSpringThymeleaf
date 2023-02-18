@@ -1,7 +1,7 @@
 package com.dione.npspringthymeleaf.controller;
 
+import com.dione.npspringthymeleaf.model.CalendarType;
 import com.dione.npspringthymeleaf.model.EventDate;
-import com.dione.npspringthymeleaf.repository.CalendarTypeRepository;
 import com.dione.npspringthymeleaf.repository.EventDateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.expression.Strings;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,11 +21,6 @@ public class EventDateController {
 
     @Autowired
     private EventDateRepository repository;
-
-    @Autowired
-    private CalendarTypeRepository calendarTypeRepository;
-
-    public Strings strings;
 
 
     @GetMapping(value = "/dashboard")
@@ -83,8 +77,14 @@ public class EventDateController {
     @GetMapping("/{id}")
     public String eventProfile(@PathVariable("id") Long id, Model model) {
         EventDate eventId = repository.getDateById(id);
-        String strings = repository.getDateById(id).getType().toString().toLowerCase();
-        model.addAttribute("type", capitalize(strings));
+        if (eventId.getType() != null) {
+            String strings = eventId.getType().toString().toLowerCase() + " of ";
+            model.addAttribute("type", capitalize(strings));
+        } else if (eventId.getType() == null) {
+            String eventTypeNull = "";
+            model.addAttribute("type", eventTypeNull);
+
+        }
         model.addAttribute("date", eventId);
         return "date/date-profile";
     }
@@ -106,4 +106,13 @@ public class EventDateController {
 
     }
 
+
+    @GetMapping("/year/{year}")
+    public String eventYear(@PathVariable("year") Integer year, Model model, @RequestParam(defaultValue = "1") int page,
+                            @RequestParam(defaultValue = "6") int size,
+                            @RequestParam(defaultValue = "id,asc") String[] sort) {
+        List<CalendarType> list = repository.findAllByYearsOrderByMonths(year);
+        model.addAttribute("events", list);
+        return "calendar/calendar-year";
+    }
 }
