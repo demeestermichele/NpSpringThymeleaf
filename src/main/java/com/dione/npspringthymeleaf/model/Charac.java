@@ -21,6 +21,10 @@ public class Charac implements Serializable {
     private String firstName;
     private String lastName;
 
+    private Role role;
+
+    private Sex sex;
+
 
     /**
      * Constructors
@@ -75,15 +79,34 @@ public class Charac implements Serializable {
         this.lastName = lastName;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
     /**
      * ToString
      **/
+
     @Override
     public String toString() {
-        return "Character{" +
+        return "Charac{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", role=" + role +
+                ", sex=" + sex +
                 '}';
     }
 }
