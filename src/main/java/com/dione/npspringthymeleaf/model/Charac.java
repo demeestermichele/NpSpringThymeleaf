@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,6 +27,9 @@ public class Charac implements Serializable {
 
     private Sex sex;
 
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private EventDate event;
 
     /**
      * Constructors
@@ -93,6 +98,14 @@ public class Charac implements Serializable {
 
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public EventDate getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventDate event) {
+        this.event = event;
     }
 
     /**

@@ -32,9 +32,10 @@
     </div>
 </nav>
 <h1>
-    <a th:text="${character.id}"></a>
+<!--    <a th:text="${character.id}"></a>-->
     <a th:text="${character.firstName}"></a>
     <a th:text="${character.lastName}"></a>
+    <a th:text="${character.event}"></a>
 </h1>
 <a class="btn btn-info" href="#" th:href="@{/character/edit/{id}(id=${character.id})}"> edit </a>
 
