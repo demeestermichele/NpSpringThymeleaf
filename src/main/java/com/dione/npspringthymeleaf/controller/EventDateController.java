@@ -112,7 +112,10 @@ public class EventDateController {
                             @RequestParam(defaultValue = "6") int size,
                             @RequestParam(defaultValue = "id,asc") String[] sort) {
         List<CalendarType> list = repository.findAllByYearsOrderByMonths(year);
+        List<CalendarType> calendarType = repository.findEventDatesByYears(year);
+        model.addAttribute("eventYear", calendarType.get(0));
         model.addAttribute("events", list);
+        System.out.println(calendarType.get(0));
         return "calendar/calendar-year";
     }
 }

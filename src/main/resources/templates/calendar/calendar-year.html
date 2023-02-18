@@ -35,24 +35,31 @@
         location.href = "/date/" + value;
     }
 </script>
-<table class="table table-hover link" th:each="item : ${events}">
-    <thead th:text="${item.years} + ' events'">
-    <tr>
-        <th></th>
-        <th ></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
+<h1 th:each="year : ${eventYear}" th:text="'Events'${year.years}"></h1>
+<table style="column-width: auto" class="table table-hover link">
+<thead th:each="property : ${eventYear}">
+<tr>
+<th></th>
+    <th th:text="${property.name} ? 'Name' : ''" ></th>
+    <th th:text="${property.description} ? 'Description' : ''" ></th>
+    <th th:text="${property.months} ? 'Month' : ''" >
+    <th th:text="${property.weeks} ? 'Week' : ''" ></th>
+    <th th:text="${property.days} ? 'Day' : ''" ></th>
+    <th th:text="${property.hours} ? 'Hour' : ''" ></th>
+    <th th:text="${property.minutes} ? 'Minutes' : ''" ></th>
+    <th></th>
+</tr>
+</thead>
+    <tbody th:each="item : ${events}">
     <tr th:if="${events.empty}">
         <td colspan="2"> No Calendars Available</td>
     </tr>
     <tr
-        th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
-<!--        <td><a th:text="${item.id}"></a></td>-->
-                <td><a th:text="${item.shortForm}"></a></td>
-<!--        <td><a th:text="${item.years}"></a></td>-->
-        <td><a th:text="${item.name}"></a></td>
+            th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
+        <!--        <td><a th:text="${item.id}"></a></td>-->
+        <td><a th:text="${item.shortForm}"></a></td>
+        <!--        <td><a th:text="${item.years}"></a></td>-->
+        <td><a th:text="${item.name} ? ${item.name} : 'Add name'"></a></td>
         <td><a th:text="${item.description}"></a></td>
         <td><a th:text="${item.months}"></a></td>
         <td><a th:text="${item.weeks}"></a></td>
