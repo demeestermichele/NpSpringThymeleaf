@@ -35,8 +35,13 @@
 <!--    <a th:text="${character.id}"></a>-->
     <a th:text="${character.firstName}"></a>
     <a th:text="${character.lastName}"></a>
-    <a th:text="${character.event}"></a>
 </h1>
+<table>
+    <tr th:each="events : ${character}" >
+        <td><a th:text="${events.event}"></a>
+        </td>
+    </tr>
+</table>
 <a class="btn btn-info" href="#" th:href="@{/character/edit/{id}(id=${character.id})}"> edit </a>
 
 </body>

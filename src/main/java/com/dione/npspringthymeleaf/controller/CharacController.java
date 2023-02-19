@@ -29,10 +29,7 @@ public class CharacController {
     @GetMapping(value = "/all")
     public String showAll(Model model) {
         List<Charac> characList = characRepository.findAll(Sort.by("id"));
-
-        dateRepository.getEventDateByTypeBirth(characRepository.findBy("eventDate"));
         model.addAttribute("characters", characList);
-        model.addAttribute("birth", birthDate);
         return "character/character-list";
     }
 
@@ -76,7 +73,12 @@ public class CharacController {
 
     @GetMapping("/{id}")
     public String characterProfile(@PathVariable("id") long id, Model model) {
-        model.addAttribute("character", characRepository.findCharacById(id));
+        Charac charac = characRepository.findCharacById(id);
+
+        EventDateController eventDateController = new EventDateController();
+        List<EventDate> eventDateList= dateRepository.getEventDatesByType(EventType.BIRTH));
+//        Charac charac1 = characRepository.
+        model.addAttribute("character", charac);
         return "character/character-profile";
     }
 
