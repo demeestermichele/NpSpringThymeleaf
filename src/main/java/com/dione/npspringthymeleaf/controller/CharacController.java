@@ -1,16 +1,20 @@
 package com.dione.npspringthymeleaf.controller;
 
 import com.dione.npspringthymeleaf.model.Charac;
+import com.dione.npspringthymeleaf.model.EventDate;
+import com.dione.npspringthymeleaf.model.EventType;
 import com.dione.npspringthymeleaf.repository.CharacRepository;
+import com.dione.npspringthymeleaf.repository.EventDateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/character")
@@ -19,14 +23,16 @@ public class CharacController {
 
     @Autowired
     private CharacRepository characRepository;
+    @Autowired
+    private EventDateRepository dateRepository;
 
-    @GetMapping(value = "/all") //sorted descending
+    @GetMapping(value = "/all")
     public String showAll(Model model) {
-        Iterable<Charac> list = characRepository.findAll();
-        Comparator<Charac> compareId = (Charac c1, Charac c2) -> c1.getId().compareTo(c2.getId());
-        ((ArrayList<Charac>) list).sort(compareId);
-        model.addAttribute("characters", list);
+        List<Charac> characList = characRepository.findAll(Sort.by("id"));
 
+        dateRepository.getEventDateByTypeBirth(characRepository.findBy("eventDate"));
+        model.addAttribute("characters", characList);
+        model.addAttribute("birth", birthDate);
         return "character/character-list";
     }
 
@@ -47,7 +53,6 @@ public class CharacController {
         model.addAttribute("characters", charac);
         return "character/character-creation";
     }
-
 
 
     @PostMapping("/update/{id}") //this works

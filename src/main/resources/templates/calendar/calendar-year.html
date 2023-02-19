@@ -35,11 +35,12 @@
         location.href = "/date/" + value;
     }
 </script>
-<h1 th:each="year : ${eventYear}" th:text="'Events'${year.years}"></h1>
+<h1 th:each="year : ${eventYear}" th:text="'Events of ' + ${year.years}"></h1>
 <table style="column-width: auto" class="table table-hover link">
 <thead th:each="property : ${eventYear}">
 <tr>
 <th></th>
+    <th th:text="${property.type} ? 'Event' : ''" ></th>
     <th th:text="${property.name} ? 'Name' : ''" ></th>
     <th th:text="${property.description} ? 'Description' : ''" ></th>
     <th th:text="${property.months} ? 'Month' : ''" >
@@ -58,6 +59,7 @@
             th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
         <!--        <td><a th:text="${item.id}"></a></td>-->
         <td><a th:text="${item.shortForm}"></a></td>
+        <td><a th:text="${item.type}"></a></td>
         <!--        <td><a th:text="${item.years}"></a></td>-->
         <td><a th:text="${item.name} ? ${item.name} : 'Add name'"></a></td>
         <td><a th:text="${item.description}"></a></td>

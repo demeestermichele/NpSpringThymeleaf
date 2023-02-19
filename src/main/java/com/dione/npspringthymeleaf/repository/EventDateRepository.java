@@ -1,6 +1,7 @@
 package com.dione.npspringthymeleaf.repository;
 
 import com.dione.npspringthymeleaf.model.CalendarType;
+import com.dione.npspringthymeleaf.model.Charac;
 import com.dione.npspringthymeleaf.model.EventDate;
 import com.dione.npspringthymeleaf.model.EventType;
 import jdk.jfr.Event;
@@ -12,8 +13,9 @@ import java.util.List;
 public interface EventDateRepository extends JpaRepository<EventDate, Long> {
 
     EventDate getDateById(Long id);
-    EventDate getEventDatesByType(EventType type);
+    List<EventDate> getEventDatesByType(EventType type);
     List<CalendarType> findAllByYearsOrderByMonths(Integer years);
     List<CalendarType> findEventDatesByYears(Integer years);
     EventDate findEventDateByYears(Integer years);
+    Long getEventDateByTypeBirth(Charac charac);
 }

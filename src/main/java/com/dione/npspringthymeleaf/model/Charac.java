@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,6 +23,13 @@ public class Charac implements Serializable {
     private String firstName;
     private String lastName;
 
+    private Role role;
+
+    private Sex sex;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private EventDate event;
 
     /**
      * Constructors
@@ -75,15 +84,42 @@ public class Charac implements Serializable {
         this.lastName = lastName;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public EventDate getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventDate event) {
+        this.event = event;
+    }
+
     /**
      * ToString
      **/
+
     @Override
     public String toString() {
-        return "Character{" +
+        return "Charac{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", role=" + role +
+                ", sex=" + sex +
                 '}';
     }
 }
