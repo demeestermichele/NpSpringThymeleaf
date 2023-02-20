@@ -35,6 +35,17 @@ public class Charac implements Serializable {
     @JoinColumn(name = "birth")
     private EventDate birth;
 
+    private String nickname;
+
+    @ManyToOne
+    @JoinColumn(name = "mother", nullable = true)
+    private Charac mother;
+
+    @ManyToOne
+    @JoinColumn(name = "father", nullable = true)
+    private Charac father;
+
+
     /**
      * Constructors
      **/
@@ -120,6 +131,21 @@ public class Charac implements Serializable {
         this.birth = birth;
     }
 
+    public Charac getFather() {
+        return father;
+    }
+
+    public void setFather(Charac father) {
+        this.father = father;
+    }
+
+    public Charac getMother() {
+        return mother;
+    }
+
+    public void setMother(Charac mother) {
+        this.mother = mother;
+    }
 
     /**
      * ToString

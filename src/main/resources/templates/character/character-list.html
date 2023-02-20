@@ -41,10 +41,10 @@
 <table class="table table-hover link">
     <thead>
     <tr>
-        <th></th>
-        <th></th>
+        <th>Date of Birth</th>
         <th>Name</th>
-        <th></th>
+        <th>Mother</th>
+        <th>Father</th>
     </tr>
     </thead>
     <tbody>
@@ -53,14 +53,39 @@
     </tr>
     <tr th:each="charac : ${characters}" style="cursor: pointer"
         th:onclick="'javascript:rowClicked(\'' + ${charac.id} + '\');'">
-        <td><a th:text="${charac.id}"></a></td>
-        <td><a
-               th:text="${charac.birth} ? ${charac.birth} : 'unknown'"></a></td>
+        <!--        <td><a th:text="${charac.id}"></a></td>-->
+        <td th:if="!${charac.birth}">
+            <a th:text="'unknown'"></a></td>
+        <td th:each="dob : ${charac.birth}">
+            <a th:if="${dob.shortForm}" th:text="${dob.shortForm}? ${dob.shortForm} : 'unknown'"></a>
+        </td>
         <td>
-            <a th:text="${charac.firstName} + ' ' + ${charac.lastName}"></a></td>
+            <a th:text="${charac.firstName}? ${charac.firstName} : 'unknown'"></a>
+            <a th:text="${charac.lastName}? ${charac.lastName} : 'unknown'"></a>
+        </td>
+
+        <td th:if="!${charac.mother}">
+            <a th:text="'unknown'"></a></td>
+        <td th:each="mother : ${charac.mother}">
+            <a th:if="${mother.firstName}" th:text="${mother.firstName}"></a>
+        </td>
+
+        <td th:if="!${charac.father}">
+            <a th:text="'unknown'"></a></td>
+        <td th:each="father : ${charac.father}">
+            <a th:if="${father.firstName}" th:text="${father.firstName}"></a>
+        </td>
+        <!--
+                <td th:each="motherName : ${charac.mother}">
+                    <a th:href="@{/character/{id}(id=${motherName.id})}"
+                       th:text="${motherName.firstName} ? ${motherName.firstName} : 'unknown'"></a>
+                </td>
+                <td th:each="fatherName : ${charac.father}">
+                    <a th:href="@{/character/{id}(id=${fatherName.id})}"
+                       th:text="${charac.father} ? ${fatherName.firstName} : 'unknown'"></a></td>-->
         <!--        this works -->
-        <td><a th:href="@{/character/edit/{id}(id=${charac.id})}">Edit</a></td>
-        <td><a th:href="@{/character/delete/{id}(id=${charac.id})}">Delete</a></td>
+        <!--      <td><a th:href="@{/character/edit/{id}(id=${charac.id})}">Edit</a></td>
+              <td><a th:href="@{/character/delete/{id}(id=${charac.id})}">Delete</a></td>-->
     </tr>
     </tbody>
 </table>

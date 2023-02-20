@@ -42,7 +42,7 @@
             <a th:text="'birth date unknown'"></a>
         </td>
         <td th:if="${character.birth}" >
-            <a th:text="${character.birth} ? ${character.birth.shortForm} : 'birth date unknown' "></a>
+            <a th:text="${character.birth} ? 'Date of birth: ' + ${character.birth.shortForm} : 'birth date unknown' "></a>
         </td>
     </tr>
 </table>
