@@ -54,8 +54,8 @@
     <tr th:each="charac : ${characters}" style="cursor: pointer"
         th:onclick="'javascript:rowClicked(\'' + ${charac.id} + '\');'">
         <td><a th:text="${charac.id}"></a></td>
-        <td><a th:each="dob : ${birth}" th:class="${dob.current}? 'current'"
-               th:text="${charac.id}"></a></td>
+        <td><a
+               th:text="${charac.birth} ? ${charac.birth} : 'unknown'"></a></td>
         <td>
             <a th:text="${charac.firstName} + ' ' + ${charac.lastName}"></a></td>
         <!--        this works -->

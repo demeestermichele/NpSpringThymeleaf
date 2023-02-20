@@ -3,6 +3,7 @@ package com.dione.npspringthymeleaf.model;
 import com.dione.npspringthymeleaf.model.conversions.Conversion;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -22,7 +23,6 @@ public class EventDate extends CalendarType {
 
     @Column(name = "short_form", nullable = true)
     private double shortForm;
-
 
     @OneToOne
     @JoinColumn(name = "duration_id")
@@ -111,7 +111,8 @@ public class EventDate extends CalendarType {
 //        DecimalFormat days = new DecimalFormat("##");
 //        DecimalFormat months = new DecimalFormat("##");
 //        DecimalFormat years = new DecimalFormat("####");
-        return "Event long date: " +
+        return
+//                "Event long date: " +
                 Math.round(super.getDays()) + "." +
                 Math.round(super.getMonths()) + "." +
                 Math.round(super.getYears());

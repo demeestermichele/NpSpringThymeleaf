@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/character")
@@ -29,7 +28,10 @@ public class CharacController {
     @GetMapping(value = "/all")
     public String showAll(Model model) {
         List<Charac> characList = characRepository.findAll(Sort.by("id"));
+        List<Charac> characs = characRepository.getCharacsByEventType(EventType.BIRTH);
+        model.addAttribute("birth", characs);
         model.addAttribute("characters", characList);
+        System.out.println(characs);
         return "character/character-list";
     }
 
@@ -74,11 +76,10 @@ public class CharacController {
     @GetMapping("/{id}")
     public String characterProfile(@PathVariable("id") long id, Model model) {
         Charac charac = characRepository.findCharacById(id);
-
-        EventDateController eventDateController = new EventDateController();
-        List<EventDate> eventDateList= dateRepository.getEventDatesByType(EventType.BIRTH));
-//        Charac charac1 = characRepository.
+        List<EventDate> eventDateList = dateRepository.getEventDatesByType(EventType.BIRTH);
+        model.addAttribute("birth", eventDateList.listIterator().next().getShortForm());
         model.addAttribute("character", charac);
+//        System.out.println(eventDateList.listIterator().next().getShortForm());
         return "character/character-profile";
     }
 

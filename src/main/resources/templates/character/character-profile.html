@@ -37,12 +37,18 @@
     <a th:text="${character.lastName}"></a>
 </h1>
 <table>
-    <tr th:each="events : ${character}" >
-        <td><a th:text="${events.event}"></a>
+    <tr>
+        <td th:if="!${character.birth}" >
+            <a th:text="'birth date unknown'"></a>
+        </td>
+        <td th:if="${character.birth}" >
+            <a th:text="${character.birth} ? ${character.birth.shortForm} : 'birth date unknown' "></a>
         </td>
     </tr>
 </table>
-<a class="btn btn-info" href="#" th:href="@{/character/edit/{id}(id=${character.id})}"> edit </a>
 
+    <!--table for list of events they are present in-->
+
+<a class="btn btn-info" href="#" th:href="@{/character/edit/{id}(id=${character.id})}"> edit </a>
 </body>
 </html>

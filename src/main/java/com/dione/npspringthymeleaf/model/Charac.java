@@ -28,8 +28,12 @@ public class Charac implements Serializable {
     private Sex sex;
 
     @ManyToOne
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "EVENT_ID")
     private EventDate event;
+
+    @ManyToOne
+    @JoinColumn(name = "birth")
+    private EventDate birth;
 
     /**
      * Constructors
@@ -107,6 +111,15 @@ public class Charac implements Serializable {
     public void setEvent(EventDate event) {
         this.event = event;
     }
+
+    public EventDate getBirth() {
+        return birth;
+    }
+
+    public void setBirth(EventDate birth) {
+        this.birth = birth;
+    }
+
 
     /**
      * ToString
