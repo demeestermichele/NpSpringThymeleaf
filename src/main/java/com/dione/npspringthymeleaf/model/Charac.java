@@ -35,7 +35,7 @@ public class Charac implements Serializable {
     @JoinColumn(name = "birth")
     private EventDate birth;
 
-    private String nickname;
+    private String alias;
 
     @ManyToOne
     @JoinColumn(name = "mother", nullable = true)

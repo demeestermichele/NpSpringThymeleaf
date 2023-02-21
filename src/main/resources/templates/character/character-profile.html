@@ -42,7 +42,21 @@
             <a th:text="'birth date unknown'"></a>
         </td>
         <td th:if="${character.birth}" >
-            <a th:text="${character.birth} ? 'Date of birth: ' + ${character.birth.shortForm} : 'birth date unknown' "></a>
+            Date of birth: <a th:href="@{/date/year/{year}(year=${character.birth.years})}"   th:text="${character.birth.shortForm}"></a>
+        </td>
+    </tr>
+    <tr>
+        <td th:if="!${character.mother}" >
+            <a th:text="'Mother unknown'"></a>
+        </td>
+        <td th:if="${character.mother}" >
+            Mother: <a th:href="@{/character/{id}(id=${character.mother.id})}"  th:text="${character.mother.firstName}"></a>
+        </td>
+        <td th:if="!${character.father}" >
+            <a th:text="'Father unknown'"></a>
+        </td>
+        <td th:if="${character.father}" >
+            Father: <a th:href="@{/character/{id}(id=${character.father.id})}"   th:text="${character.father.firstName}"></a>
         </td>
     </tr>
 </table>
