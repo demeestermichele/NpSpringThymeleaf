@@ -133,7 +133,7 @@ public class EventDateController {
         model.addAttribute("all", characRepositoryAll);
         model.addAttribute("birthMonth", list);
         model.addAttribute("month", month);
-//        System.out.println(characRepositoryAll);
+        System.out.println("birthday page works");
         return "calendar/shared-birthdays";
     }
 }

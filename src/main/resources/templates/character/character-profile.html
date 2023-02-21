@@ -33,7 +33,7 @@
 </nav>
 <h1>
 <!--    <a th:text="${character.id}"></a>-->
-    <a th:text="${character.firstName}"></a>
+    <a th:text="${character.firstName} ? ${character.firstName} : 'unnamed ' + ${character.id}"></a>
     <a th:text="${character.lastName}"></a>
 </h1>
 <table>
