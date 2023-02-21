@@ -1,7 +1,9 @@
 package com.dione.npspringthymeleaf.controller;
 
 import com.dione.npspringthymeleaf.model.CalendarType;
+import com.dione.npspringthymeleaf.model.Charac;
 import com.dione.npspringthymeleaf.model.EventDate;
+import com.dione.npspringthymeleaf.repository.CharacRepository;
 import com.dione.npspringthymeleaf.repository.EventDateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -21,6 +23,9 @@ public class EventDateController {
 
     @Autowired
     private EventDateRepository repository;
+
+    @Autowired
+    private CharacRepository characRepository;
 
 
     @GetMapping(value = "/dashboard")
@@ -117,5 +122,18 @@ public class EventDateController {
         model.addAttribute("events", list);
         System.out.println(calendarType.get(0));
         return "calendar/calendar-year";
+    }
+
+    @GetMapping("/birthday/{month}")
+    public String sharedBirthdays(@PathVariable("month") Integer month, Model model, @RequestParam(defaultValue = "1") int page,
+                                  @RequestParam(defaultValue = "6") int size,
+                                  @RequestParam(defaultValue = "days,asc") String[] sort) {
+        List<CalendarType> list = repository.findAllByMonthsOrderByDays(month);
+        List<Charac> characRepositoryAll = characRepository.findAll(Sort.by("birth.days").ascending());
+        model.addAttribute("all", characRepositoryAll);
+        model.addAttribute("birthMonth", list);
+        model.addAttribute("month", month);
+//        System.out.println(characRepositoryAll);
+        return "calendar/shared-birthdays";
     }
 }

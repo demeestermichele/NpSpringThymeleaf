@@ -42,7 +42,7 @@
     <thead>
     <tr>
         <th>Date of Birth</th>
-        <td>Alias</td>
+        <th>Alias</th>
         <th>Name</th>
         <th>Mother</th>
         <th>Father</th>
@@ -64,7 +64,7 @@
 <!--            <a th:text="${charac.alias}? ${charac.alias} : ''" ></a>-->
         </td>
         <td>
-            <a th:text="${charac.firstName}? ${charac.firstName} : 'unknown'"></a>
+            <a th:text="${charac.firstName}? ${charac.firstName} : 'unknown ' + ${charac.id}"></a>
             <a th:text="${charac.lastName}? ${charac.lastName} : ''"></a>
         </td>
 

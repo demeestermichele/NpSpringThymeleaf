@@ -15,6 +15,8 @@ public interface EventDateRepository extends JpaRepository<EventDate, Long> {
 
     List<CalendarType> findAllByYearsOrderByMonths(Integer years);
 
+    List<CalendarType> findEventDatesByMonthsOrderByDays(Integer month);
+    List<CalendarType> findAllByMonthsOrderByDays(Integer month);
     List<CalendarType> findEventDatesByYears(Integer years);
 
     EventDate getEventDateByType(EventType type);
