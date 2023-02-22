@@ -19,6 +19,7 @@ public interface CharacRepository extends JpaRepository<Charac, Long> {
     List<Charac> getCharacsByEventType(EventType eventType);
     List<Charac> getAllByBirthMonths(Integer month);
 
+    List<Charac> findCharacsByBirthMonthsAndBirthDaysOrderByBirthAsc(Integer birth_months, Integer birth_days);
 
     List<Charac> getCharacsByBirthDays(Integer days);
 

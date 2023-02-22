@@ -45,20 +45,25 @@
             <th>Day</th>
         </tr>
     </thead>
-    <tr >
-    </tr>
-    <tr th:if="${birthMonth.empty}">
+    <tr th:if="${all.empty}">
         <td colspan="2"> No birthdays this month</td>
     </tr>
     <!--/*/ <th:block th:each="c : ${all}">/*/-->
     <tr style="cursor: pointer"
-        th:onclick="'javascript:rowClicked(\'' + ${c.id} + '\');'" th:each="d : ${c.birth}" th:unless="!${d.months == month}">
-        <!--        search through all birth events-->
-        <!--            take only the birth events of the month in the link-->
-        <td th:text="${c.firstName}? ${c.firstName} : 'unnamed ' + ${c.id}"></td>
-        <td  th:each="e : ${d.days}" th:text="${e}"></td>
+        th:onclick="'javascript:rowClicked(\'' + ${c.id} + '\');'" th:each="d : ${c.birth}" th:unless="!${d.months == month}" >
 
+        <td th:text="${c.firstName}? ${c.firstName} : 'unnamed ' + ${c.id}" ></td>
 
+        <td th:each="day : ${#numbers.sequence(1,50)}"  th:if="${d.days == day}" >
+            <a th:text="${d.days} ? ${d.days} : 'none'" >
+
+            </a>
+
+        </td>
+<!--        <td th:if="${(#lists.size(c))}" th:text="'this works'" >-->
+
+        </td>
+<!--        <td th:each="i : ${#numbers.sequence(1,50, 1)}" th:text="${i}" ></td>-->
     </tr>
 
     <!--/*/ </th:block>/*/-->

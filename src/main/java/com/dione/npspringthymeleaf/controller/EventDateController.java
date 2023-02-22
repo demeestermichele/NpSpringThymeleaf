@@ -5,6 +5,7 @@ import com.dione.npspringthymeleaf.model.Charac;
 import com.dione.npspringthymeleaf.model.EventDate;
 import com.dione.npspringthymeleaf.repository.CharacRepository;
 import com.dione.npspringthymeleaf.repository.EventDateRepository;
+import io.netty.util.concurrent.BlockingOperationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static org.thymeleaf.util.StringUtils.capitalize;
 
@@ -128,12 +131,24 @@ public class EventDateController {
     public String sharedBirthdays(@PathVariable("month") Integer month, Model model, @RequestParam(defaultValue = "1") int page,
                                   @RequestParam(defaultValue = "6") int size,
                                   @RequestParam(defaultValue = "days,asc") String[] sort) {
-        List<CalendarType> list = repository.findAllByMonthsOrderByDays(month);
-        List<Charac> characRepositoryAll = characRepository.findAll(Sort.by("birth.days").ascending());
-        model.addAttribute("all", characRepositoryAll);
-        model.addAttribute("birthMonth", list);
+
         model.addAttribute("month", month);
-        System.out.println("birthday page works");
+
+        List<Charac> characRepositoryAll = characRepository.findAll(Sort.by("birth.days").ascending());
+        List<Charac> characList = characRepository.getAllByBirthMonths(month);
+
+//        List<Charac> list = characRepository.getCharacsByBirthDays(i);
+
+
+
+        Map<Charac, Integer> map = characList.stream()
+                .collect(Collectors.
+                        toMap(Function.identity(),
+                                value -> 1, Integer::sum));
+
+
+//        System.out.println(map);
+        model.addAttribute("all", characRepositoryAll);
         return "calendar/shared-birthdays";
     }
 }

@@ -157,8 +157,8 @@ public class Charac implements Serializable {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", role=" + role +
-                ", sex=" + sex +
+                ", months=" + birth.getMonths() +
+                ", days=" + birth.getDays() +
                 '}';
     }
 }

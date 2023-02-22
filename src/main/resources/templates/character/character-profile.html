@@ -36,32 +36,34 @@
     <a th:text="${character.firstName} ? ${character.firstName} : 'unnamed ' + ${character.id}"></a>
     <a th:text="${character.lastName}"></a>
 </h1>
-<table>
-    <tr>
-        <td th:if="!${character.birth}" >
+<div>
+    <div>
+    <div>
+        <div></div>
+    </div>
+    </div>
+    <div>
+        <div th:if="!${character.birth}" >
             <a th:text="'birth date unknown'"></a>
-        </td>
-        <td th:if="${character.birth}" >
+        </div>
+        <div th:if="${character.birth}" >
             Date of birth: <a th:href="@{/date/year/{year}(year=${character.birth.years})}"   th:text="${character.birth.shortForm}"></a>
-        </td>
-    </tr>
-    <tr>
-        <td th:if="!${character.mother}" >
-            <a th:text="'Mother unknown'"></a>
-        </td>
-        <td th:if="${character.mother}" >
+        </div>
+    </div>
+    <div><span>
+        <div th:if="!${character.mother}" th:text="'Mother unknown'"></div>
+        <div th:if="${character.mother}">
             Mother: <a th:href="@{/character/{id}(id=${character.mother.id})}"  th:text="${character.mother.firstName}"></a>
-        </td>
-        <td th:if="!${character.father}" >
-            <a th:text="'Father unknown'"></a>
-        </td>
-        <td th:if="${character.father}" >
+        </div></span>
+        <span>
+        <div th:if="!${character.father}" th:text="'Father unknown'"></div>
+        <div th:if="${character.father}" >
             Father: <a th:href="@{/character/{id}(id=${character.father.id})}"   th:text="${character.father.firstName}"></a>
-        </td>
-    </tr>
-</table>
+        </div></span>
+    </div>
+</div>
 
-    <!--table for list of events they are present in-->
+
 
 <a class="btn btn-info" href="#" th:href="@{/character/edit/{id}(id=${character.id})}"> edit </a>
 </body>
