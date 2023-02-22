@@ -43,6 +43,7 @@
         <tr>
             <th>Name</th>
             <th>Day</th>
+            <th>Year</th>
         </tr>
     </thead>
     <tr th:if="${all.empty}">
@@ -55,12 +56,10 @@
         <td th:text="${c.firstName}? ${c.firstName} : 'unnamed ' + ${c.id}" ></td>
 
         <td th:each="day : ${#numbers.sequence(1,50)}"  th:if="${d.days == day}" >
-            <a th:text="${d.days} ? ${d.days} : 'none'" >
-
-            </a>
+            <a th:text="${d.days} ? ${d.days} : 'none'" ></a>
 
         </td>
-<!--        <td th:if="${(#lists.size(c))}" th:text="'this works'" >-->
+        <td th:text="${d.years}" >
 
         </td>
 <!--        <td th:each="i : ${#numbers.sequence(1,50, 1)}" th:text="${i}" ></td>-->

@@ -61,7 +61,7 @@
         <td><a th:text="${item.shortForm}"></a></td>
         <td><a th:text="${item.type}"></a></td>
         <!--        <td><a th:text="${item.years}"></a></td>-->
-        <td><a th:text="${item.name} ? ${item.name} : 'Add name'"></a></td>
+        <td><a th:text="${item.name} ? ${item.name} : 'Unnamed ' + ${item.id}"></a></td>
         <td><a th:text="${item.description}"></a></td>
         <td><a th:text="${item.months}"></a></td>
         <td><a th:text="${item.weeks}"></a></td>
