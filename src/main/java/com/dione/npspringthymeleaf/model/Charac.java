@@ -1,16 +1,7 @@
 package com.dione.npspringthymeleaf.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "Character")
@@ -114,6 +105,15 @@ public class Charac implements Serializable {
     public void setSex(Sex sex) {
         this.sex = sex;
     }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
 
     public EventDate getEvent() {
         return event;
