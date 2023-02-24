@@ -33,7 +33,18 @@
         </ul>
     </div>
 </nav>
-
+<h1>
+    <a th:text="${chapter.name}"></a>
+    <a th:text="'v' + ${chapter.version}"></a>
+</h1>
+<table>
+    <tr>
+        <td th:text="${chapter.number}" ></td>
+    </tr>
+    <tr>
+        <td th:text="${chapter.description}" ></td>
+    </tr>
+</table>
 
 </body>
 </html>
