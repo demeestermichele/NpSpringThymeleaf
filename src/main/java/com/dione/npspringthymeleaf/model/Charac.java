@@ -21,9 +21,8 @@ public class Charac implements Serializable {
 
     private Sex sex;
 
-    @ManyToOne
-    @JoinColumn(name = "EVENT_ID")
-    private EventDate event;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<EventDate> events = new LinkedHashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "birth")
@@ -120,13 +119,12 @@ public class Charac implements Serializable {
         this.alias = alias;
     }
 
-
-    public EventDate getEvent() {
-        return event;
+    public Set<EventDate> getEvents() {
+        return events;
     }
 
-    public void setEvent(EventDate event) {
-        this.event = event;
+    public void setEvents(Set<EventDate> events) {
+        this.events = events;
     }
 
     public EventDate getBirth() {

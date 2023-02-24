@@ -94,6 +94,7 @@ public class EventDateController {
 
         }
         model.addAttribute("date", eventId);
+        model.addAttribute("characters", characRepository.findAll());
         return "date/date-profile";
     }
 
@@ -137,6 +138,7 @@ public class EventDateController {
         List<Charac> characRepositoryAll = characRepository.findAll(Sort.by("birth.days").ascending());
         List<Charac> characList = characRepository.getAllByBirthMonths(month);
 
+        //TODO get characters with same birthday
 //        List<Charac> list = characRepository.getCharacsByBirthDays(i);
 
 

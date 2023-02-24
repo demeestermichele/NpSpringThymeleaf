@@ -28,10 +28,8 @@ public class CharacController {
     @GetMapping(value = "/all")
     public String showAll(Model model) {
         List<Charac> characList = characRepository.findAll(Sort.by("birth.shortForm"));
-        List<Charac> characs = characRepository.getCharacsByEventType(EventType.BIRTH);
-        model.addAttribute("birth", characs);
+
         model.addAttribute("characters", characList);
-        System.out.println(characs);
         return "character/character-list";
     }
 

@@ -8,6 +8,7 @@ import jdk.jfr.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CharacRepository extends JpaRepository<Charac, Long> {
     public Charac findCharacById(Long id);
@@ -16,7 +17,6 @@ public interface CharacRepository extends JpaRepository<Charac, Long> {
 
     public Charac findCharactersByLastName(String lastName);
 
-    List<Charac> getCharacsByEventType(EventType eventType);
     List<Charac> getAllByBirthMonths(Integer month);
 
     List<Charac> findCharacsByBirthMonthsAndBirthDaysOrderByBirthAsc(Integer birth_months, Integer birth_days);

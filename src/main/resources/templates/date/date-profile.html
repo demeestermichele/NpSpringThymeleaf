@@ -34,20 +34,22 @@
     </div>
 </nav>
 
-<h1><a th:text="${type} + ${date.name}"></a></h1>
+<h1><a th:text="${type} + ${date.name} + ' ' +${date.shortForm}"></a></h1>
 <table style="width: 100%; flex: auto" >
-    <tr hidden><td><label> ID </label>                     </td><td><a th:text="${date.id}">            </a></td></tr>
-    <tr><td><label> Name </label>                   </td><td><a th:text="${date.name}">          </a></td></tr>
-    <tr><td><label> Description </label>            </td><td><a th:text="${date.description}">   </a></td></tr>
-    <tr><td><label> Year </label>           </td><td><a th:text="${date.years}">         </a></td></tr>
-    <tr><td><label> Month </label>          </td><td><a th:text="${date.months}">        </a></td></tr>
-    <tr><td><label> Week </label>        </td><td><a th:text="${date.weeks}">         </a></td></tr>
-    <tr><td><label> Day </label>         </td><td><a th:text="${date.days}">          </a></td></tr>
-    <tr><td><label> Hour</label>         </td><td><a th:text="${date.hours}">         </a></td></tr>
-    <tr><td><label> Minute</label>     </td><td><a th:text="${date.minutes}">       </a></td></tr>
-    <tr><td><label> Seconds </label>    </td><td><a th:text="${date.seconds}"></a></td></tr>
-    <tr><td><label> duration </label>    </td><td><a th:text="${date.duration}"></a></td></tr>
-
+    <tr hidden><td><label> ID </label></td>     <td><a th:text="${date.id}">            </a></td></tr>
+    <tr><td><label> Name </label></td>          <td><a th:text="${date.name}">          </a></td></tr>
+    <tr th:if="${date.description}" ><td><label> Description </label></td>   <td><a th:text="${date.description}">   </a></td></tr>
+    <tr th:if="${date.years}"><td><label> Year </label> </td>         <td><a th:text="${date.years}">         </a></td></tr>
+    <tr th:if="${date.months}"><td><label> Month </label></td>         <td><a th:text="${date.months}">        </a></td></tr>
+    <tr th:if="${date.weeks}"><td><label> Week </label></td>          <td><a th:text="${date.weeks}">         </a></td></tr>
+    <tr th:if="${date.days}"><td><label> Day </label></td>           <td><a th:text="${date.days}">          </a></td></tr>
+    <tr th:if="${date.hours}"><td><label> Hour</label></td>           <td><a th:text="${date.hours}">         </a></td></tr>
+    <tr th:if="${date.minutes}"><td><label> Minute</label></td>         <td><a th:text="${date.minutes}">       </a></td></tr>
+    <tr th:if="${date.seconds}"><td><label> Seconds </label></td>       <td><a th:text="${date.seconds}"></a></td></tr>
+    <tr th:if="${date.duration}"><td><label> duration </label></td>      <td><a th:text="${date.duration}"></a></td></tr>
+<tr>
+    <td th:each="character : ${characters}" th:if="${date.id} == ${character.event}" th:text="${character.firstName}" ></td>
+</tr>
 </table>
 <br>
 <a class="btn btn-info" href="#" th:href="@{/date/edit/{id}(id=${date.id})}"> edit </a>
