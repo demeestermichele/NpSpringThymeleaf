@@ -79,6 +79,7 @@ public class CharacController {
         List<EventDate> eventDateList = dateRepository.getEventDatesByType(EventType.BIRTH);
         model.addAttribute("birth", eventDateList.listIterator().next().getShortForm());
         model.addAttribute("character", charac);
+        model.addAttribute("all", characRepository.findAll());
 //        System.out.println(eventDateList.listIterator().next().getShortForm());
         return "character/character-profile";
     }

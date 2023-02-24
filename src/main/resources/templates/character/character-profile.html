@@ -79,6 +79,21 @@
             Role: <a th:text="${character.role} ? ${character.role} : 'not set' "></a>
         </td>
     </tr>
+    <tr></tr>
+    <tr>
+        <td><h2>Children</h2></td>
+    </tr>
+<!--    Children of character -->
+    <tr th:each="mkids : ${all}" th:if="${mkids.mother} == ${character} or ${mkids.father} == ${character}">
+        <td th:text="${mkids.firstName != null} ? ${mkids.firstName} : 'unnamed' + ${mkids.id}">
+        </td>
+    </tr>
+
+<!--    <tr>-->
+<!--        <td th:if="!${#lists.isEmpty(all.mother)} || !${#lists.isEmpty(all.father)}" th:each="father : ${all.father}" th:text="${father == character}">-->
+
+<!--        </td>-->
+<!--    </tr>-->
 </table>
 <!--table for list of events they are present in-->
 
