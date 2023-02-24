@@ -75,19 +75,18 @@ public class ChapterController {
         Chapter chapter = repository.findChaptersById(id);
         model.addAttribute("chapter", chapter);
         model.addAttribute("all", repository.findAll());
-//        System.out.println(eventDateList.listIterator().next().getShortForm());
         return "chapter/chapter-profile";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
+    public String deleteChapter(@PathVariable("id") long id, Model model) {
         Chapter chapter = repository.findChaptersById(id);
         repository.delete(chapter);
         return "redirect:/chapter/all";
     }
 
     @PostMapping(value = "/save") //persists
-    public String saveCharac(@ModelAttribute Chapter form, Model model) {
+    public String saveChapter(@ModelAttribute Chapter form, Model model) {
         repository.save(form);
         model.addAttribute("chapter", repository.findChaptersById(form.getId()));
         return "redirect:/chapter/all";
