@@ -6,7 +6,7 @@
     <meta name="author" content="">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <title>Birthdays</title>
+    <title>Title</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -34,42 +34,6 @@
     </div>
 </nav>
 
-<script>
-    function rowClicked(value) {
-        location.href = "/character/" + value;
-    }
-</script>
-<h1>Shared Birthdays <a th:text="${month}"></a></h1>
-<table class="table table-hover link">
-
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Day</th>
-            <th>Year</th>
-        </tr>
-    </thead>
-    <tr th:if="${all.empty}">
-        <td colspan="2"> No birthdays this month</td>
-    </tr>
-    <!--/*/ <th:block th:each="c : ${all}">/*/-->
-    <tr style="cursor: pointer"
-        th:onclick="'javascript:rowClicked(\'' + ${c.id} + '\');'" th:each="d : ${c.birth}" th:unless="!${d.months == month}" >
-
-        <td th:text="${c.firstName}? ${c.firstName} : 'unnamed ' + ${c.id}" ></td>
-
-        <td th:each="day : ${#numbers.sequence(1,50)}"  th:if="${d.days == day}" >
-            <a th:text="${d.days} ? ${d.days} : 'none'" ></a>
-
-        </td>
-        <td th:text="${d.years}" >
-
-        </td>
-<!--        <td th:each="i : ${#numbers.sequence(1,50, 1)}" th:text="${i}" ></td>-->
-    </tr>
-
-    <!--/*/ </th:block>/*/-->
-</table>
 
 </body>
 </html>

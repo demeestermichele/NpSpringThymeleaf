@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -7,8 +6,7 @@
     <meta name="author" content="">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-    <title>All Calendars</title>
+    <title>Title</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -18,10 +16,10 @@
                 <a class="nav-link active" th:href="@{/}">Index</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" th:href="@{/character/all}">List</a>
+                <a class="nav-link" th:href="@{/character/all}">List</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#" th:href="@{/character/create}"> Character Creation </a>
+                <a class="nav-link" href="#" th:href="@{/character/create}"> Character Creation </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/calendar/dashboard}"> Calendar </a>
@@ -35,49 +33,33 @@
         </ul>
     </div>
 </nav>
-<script>
-    function rowClicked(value) {
-        if (value !== "null"){
-        location.href = "/calendar/" + value;
-        } else {
-            location.href ="/calendar/create/"
-        }
-    }
-</script>
+
 <table class="table table-hover link">
     <thead>
     <tr>
-        <th></th>
-        <th>All Calendars</th>
-        <th></th>
+
+        <th>ID</th>
+        <th>Book</th>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Version</th>
+        <th>Description</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${calendars.empty}">
-        <td colspan="2"> No Calendars Available</td>
+    <tr th:if="${chapters.empty}">
+        <td colspan="2"> No Chapters Available</td>
     </tr>
-    <tr th:each="item : ${calendars}"
-        th:onclick="'javascript:rowClicked(\'' + ${item.id} + '\');'">
-                <td><a th:text="${item.id}"></a></td>
-        <td><a th:text="${item.years}"></a></td>
-        <td><a th:text="${item.name}"></a></td>
-        <td><a th:text="${item.description}"></a></td>
-        <td><a th:text="${item.months}"></a></td>
-        <td><a th:text="${item.weeks}"></a></td>
-        <td><a th:text="${item.days}"></a></td>
-        <td><a th:text="${item.hours}"></a></td>
-        <td><a th:text="${item.minutes}"></a></td>
-        <!--        this works -->
-        <td><a th:href="@{/calendar/edit/{id}(id=${item.id})}">Edit</a></td>
-        <td><a th:href="@{/calendar/delete/{id}(id=${item.id})}">Delete</a></td>
+    <tr th:each="chapter : ${chapters}" style="cursor: pointer"
+        th:onclick="'javascript:rowClicked(\'' + ${chapter.id} + '\');'">
+        <td th:text="${chapter.id}" ></td>
+        <td th:text="${chapter.book}" ></td>
+        <td th:text="${chapter.name}" ></td>
+        <td th:text="${chapter.number}" ></td>
+        <td th:text="${chapter.version}" ></td>
+        <td th:text="${chapter.description}" ></td>
     </tr>
     </tbody>
 </table>
 </body>
 </html>
-
-
-
-
-
-
