@@ -2,6 +2,9 @@ package com.dione.npspringthymeleaf.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Character")
@@ -35,6 +38,9 @@ public class Charac implements Serializable {
     @ManyToOne
     @JoinColumn(name = "father", nullable = true)
     private Charac father;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Chapter> chapters= new LinkedHashSet<>();
 
 
     /**
@@ -145,6 +151,14 @@ public class Charac implements Serializable {
 
     public void setMother(Charac mother) {
         this.mother = mother;
+    }
+
+    public Set<Chapter> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(Set<Chapter> chapters) {
+        this.chapters = chapters;
     }
 
     /**
