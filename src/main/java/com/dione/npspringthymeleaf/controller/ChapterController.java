@@ -22,6 +22,13 @@ public class ChapterController {
     @Autowired
     private ChapterRepository repository;
 
+
+    @GetMapping(value = "dashboard")
+    public String dashboard(Model model) {
+        model.addAttribute("chapters", repository.findAll());
+        return "chapter/chapter-dashboard";
+    }
+
     @GetMapping(value = "/all")
     public String showAll(Model model){
         List<Chapter> chapterList = repository.findAll(Sort.by("book"));
@@ -39,7 +46,6 @@ public class ChapterController {
     @GetMapping(value = "/create")
     public String showCreateForm(Model model) {
         Chapter chapter = new Chapter();
-        System.out.println("CREATE CHAPTER");
         model.addAttribute("chapters", chapter);
         return "chapter/chapter-creation";
     }
@@ -84,7 +90,6 @@ public class ChapterController {
     public String saveCharac(@ModelAttribute Chapter form, Model model) {
         repository.save(form);
         model.addAttribute("chapter", repository.findChaptersById(form.getId()));
-
         return "redirect:/chapter/all";
     }
 
