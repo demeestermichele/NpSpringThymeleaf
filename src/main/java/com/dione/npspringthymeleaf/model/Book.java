@@ -1,5 +1,5 @@
 package com.dione.npspringthymeleaf.model;
 
-public enum Books {
+public enum Book {
     AT1, AT2, AT3, AT4, CC, HYMN, ALIDAIYA
 }

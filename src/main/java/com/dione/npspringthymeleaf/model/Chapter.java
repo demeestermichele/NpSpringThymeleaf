@@ -10,7 +10,7 @@ public class Chapter implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private Integer book;
+    private Book book;
 
     private String name;
 
@@ -20,7 +20,7 @@ public class Chapter implements Serializable {
 
     private String description;
 
-    public Chapter(Integer book, String name, String description) {
+    public Chapter(Book book, String name, String description) {
         this.book = book;
         this.name = name;
         this.description = description;
@@ -38,18 +38,17 @@ public class Chapter implements Serializable {
         this.id = id;
     }
 
-    public Integer getBook() {
+    public Book getBook() {
         return book;
     }
 
-    public void setBook(Integer book) {
+    public void setBook(Book book) {
         this.book = book;
     }
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -76,5 +75,16 @@ public class Chapter implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Chapter{" +
+                "book=" + book +
+                ", name='" + name + '\'' +
+                ", number=" + number +
+                ", version=" + version +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
