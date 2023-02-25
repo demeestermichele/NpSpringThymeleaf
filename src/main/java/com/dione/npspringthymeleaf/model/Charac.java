@@ -49,6 +49,15 @@ public class Charac implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "chapter_id"))
     private Set<Chapter> chapters= new LinkedHashSet<>();
 
+    //TODO brothers and sisters (better in frontend)
+    //TODO status or titles
+    //TODO which books are these characters present in
+    //TODO which world/race do they belong to
+    //TODO what languages do they speak
+    //TODO what are their physical characteristics/ skin, eye and hair color
+    //TODO what is their personality like
+    //TODO
+
 
     /**
      * Constructors
