@@ -21,11 +21,11 @@ public class EventDate extends CalendarType {
     @Column(nullable = true)
     private EventType type;
 
-    @Column(name = "short_form", nullable = true)
+    @Column(name = "short_form")
     private double shortForm;
 
     @OneToOne
-    @JoinColumn(name = "duration_id")
+    @JoinColumn(name = "duration_id", nullable = true)
     private CalendarType duration;
 
     public CalendarType getDuration() {
