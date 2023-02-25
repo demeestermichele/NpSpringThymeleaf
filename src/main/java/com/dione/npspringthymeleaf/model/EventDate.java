@@ -4,6 +4,7 @@ import com.dione.npspringthymeleaf.model.conversions.Conversion;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "events")
@@ -28,14 +29,8 @@ public class EventDate extends CalendarType {
     @JoinColumn(name = "duration_id")
     private CalendarType duration;
 
-    public CalendarType getDuration() {
-        return duration;
-    }
-
-    public void setDuration(CalendarType duration) {
-        this.duration = duration;
-    }
-
+    @ManyToMany(mappedBy = "events")
+    private Set<Charac> characters;
 
     //constructors
 
@@ -92,6 +87,14 @@ public class EventDate extends CalendarType {
 
     public void setType(EventType type) {
         this.type = type;
+    }
+
+    public CalendarType getDuration() {
+        return duration;
+    }
+
+    public void setDuration(CalendarType duration) {
+        this.duration = duration;
     }
 
     public double getShortForm() {

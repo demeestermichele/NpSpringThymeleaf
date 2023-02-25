@@ -22,6 +22,10 @@ public class Charac implements Serializable {
     private Sex sex;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "characters_events",
+            joinColumns = @JoinColumn(name = "charac_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
     private Set<EventDate> events = new LinkedHashSet<>();
 
     @ManyToOne
@@ -39,6 +43,10 @@ public class Charac implements Serializable {
     private Charac father;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "characters_chapters",
+            joinColumns = @JoinColumn(name = "charac_id"),
+            inverseJoinColumns = @JoinColumn(name = "chapter_id"))
     private Set<Chapter> chapters= new LinkedHashSet<>();
 
 
@@ -169,8 +177,8 @@ public class Charac implements Serializable {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", months=" + birth.getMonths() +
-                ", days=" + birth.getDays() +
+             /*   ", months=" + birth.getMonths() +
+                ", days=" + birth.getDays() +*/
                 '}';
     }
 }

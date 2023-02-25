@@ -48,8 +48,9 @@
     <tr th:if="${date.seconds}"><td><label> Seconds </label></td>       <td><a th:text="${date.seconds}"></a></td></tr>
     <tr th:if="${date.duration}"><td><label> duration </label></td>      <td><a th:text="${date.duration}"></a></td></tr>
 <tr>
-    <td th:each="character : ${characters}" th:if="${date.id} == ${character.event}" th:text="${character.firstName}" ></td>
+    <td th:each="character : ${characters}" th:if="${date.id} == ${character.events}" th:text="${character.firstName}" ></td>
 </tr>
+
 </table>
 <br>
 <a class="btn btn-info" href="#" th:href="@{/date/edit/{id}(id=${date.id})}"> edit </a>
