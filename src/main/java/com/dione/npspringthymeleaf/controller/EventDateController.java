@@ -37,6 +37,12 @@ public class EventDateController {
         return "date/date-dashboard";
     }
 
+    @GetMapping(value = "/timeline")
+    public String timeline(Model model) {
+        model.addAttribute("dates", repository.findAll());
+        return "timeline/timeline";
+    }
+
     /***
      * Gets all events sorted chronologically through date "shortForm"
      * @param model
