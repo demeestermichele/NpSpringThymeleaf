@@ -14,8 +14,10 @@ public class Chapter implements Serializable {
 
     private String name;
 
+    @Column(nullable = true)
     private Integer number;
 
+    @Column(nullable = true)
     private float version;
 
     private String description;
