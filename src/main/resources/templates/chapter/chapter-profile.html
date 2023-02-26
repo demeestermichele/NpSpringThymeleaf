@@ -33,17 +33,34 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    function rowClicked(value) {
+        location.href = "/character/" + value;
+    }
+</script>
+
 <h1>
     <a th:text="${chapter.name}"></a>
     <a th:text="'v' + ${chapter.version}"></a>
 </h1>
 <table>
     <tr>
-        <td th:text="${chapter.number}" ></td>
+        <td th:text="${chapter.number}"></td>
     </tr>
     <tr>
-        <td th:text="${chapter.description}" ></td>
+        <td th:text="${chapter.description}"></td>
     </tr>
+    <tr><td><br></td></tr>
+    <tr><td><b>Characters in this chapter</b></td></tr>
+    <!--/*/ <th:block th:each="c : ${characters}">/*/-->
+    <tr style="cursor: pointer"
+        th:onclick="'javascript:rowClicked(\'' + ${c.id} + '\');'" th:each="chap : ${c.chapters}">
+        <td th:if="${chap.id == chapter.id}" th:text="${c.firstName}">
+
+        </td>
+    </tr>
+    <!--/*/ </th:block>/*/-->
 </table>
 
 </body>

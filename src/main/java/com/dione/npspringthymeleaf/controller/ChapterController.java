@@ -5,6 +5,7 @@ import com.dione.npspringthymeleaf.model.Charac;
 import com.dione.npspringthymeleaf.model.EventDate;
 import com.dione.npspringthymeleaf.model.EventType;
 import com.dione.npspringthymeleaf.repository.ChapterRepository;
+import com.dione.npspringthymeleaf.repository.CharacRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class ChapterController {
 
     @Autowired
     private ChapterRepository repository;
+
+    @Autowired
+    private CharacRepository characRepository;
 
 
     @GetMapping(value = "dashboard")
@@ -75,6 +79,7 @@ public class ChapterController {
         Chapter chapter = repository.findChaptersById(id);
         model.addAttribute("chapter", chapter);
         model.addAttribute("all", repository.findAll());
+        model.addAttribute("characters", characRepository.findAll());
         return "chapter/chapter-profile";
     }
 
