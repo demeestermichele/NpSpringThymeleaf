@@ -88,27 +88,36 @@
             Role: <a th:text="${character.role} ? ${character.role} : 'not set' "></a>
         </td>
     </tr>
-    <tr></tr>
-    <tr>
-        <td><h2>Children</h2></td>
-    </tr>
-    <!--    Children of character -->
-    <tr th:each="mkids : ${all}" th:if="${mkids.mother} == ${character} or ${mkids.father} == ${character}">
-        <td>
-            <a th:href="@{/character/{id}(id=${mkids.id})}"
-               th:text="${mkids.firstName != null} ? ${mkids.firstName} : 'unnamed' + ${mkids.id}"></a>
-        </td>
-        <td>
-
-        </td>
-    </tr>
-
-    <!--    <tr>-->
-    <!--        <td th:if="!${#lists.isEmpty(all.mother)} || !${#lists.isEmpty(all.father)}" th:each="father : ${all.father}" th:text="${father == character}">-->
-
-    <!--        </td>-->
-    <!--    </tr>-->
 </table>
+<div>
+    <div><h2>Chapters</h2></div>
+    <div  style="column-count: 3">
+        <div>
+            <!--/*/ <th:block th:each="charac : ${character.chapters}"  >/*/-->
+            <a style="float: top" th:each="chap : ${chapters}" th:if="${charac.id == chap.id}"
+               th:text="${chap.number} + ' ' + ${chap.name}" th:href="@{/chapter/{id}(id=${chap.id})}"></a>
+            <!--/*/ </th:block>/*/-->
+        </div>
+    </div>
+</div>
+<div>
+    <div>
+        <td><h2>Children</h2></td>
+    </div>
+    <!--    Children of character -->
+    <div  style="column-count: 3">
+        <div>
+            <div style="list-style-type: none">
+                <div th:each="mkids : ${all}"
+                     th:if="${mkids.mother} == ${character} or ${mkids.father} == ${character}">
+                    <a th:href="@{/character/{id}(id=${mkids.id})}"
+                       th:text="${mkids.firstName != null} ? ${mkids.firstName} : 'unnamed ' + ${mkids.id}"></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 <!--table for list of events they are present in-->
 
 <a class="btn btn-info" href="#" th:href="@{/character/edit/{id}(id=${character.id})}"> edit </a>

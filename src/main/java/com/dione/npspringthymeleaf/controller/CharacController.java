@@ -1,8 +1,7 @@
 package com.dione.npspringthymeleaf.controller;
 
 import com.dione.npspringthymeleaf.model.Charac;
-import com.dione.npspringthymeleaf.model.EventDate;
-import com.dione.npspringthymeleaf.model.EventType;
+import com.dione.npspringthymeleaf.repository.ChapterRepository;
 import com.dione.npspringthymeleaf.repository.CharacRepository;
 import com.dione.npspringthymeleaf.repository.EventDateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,9 @@ public class CharacController {
     private CharacRepository characRepository;
     @Autowired
     private EventDateRepository dateRepository;
+
+    @Autowired
+    private ChapterRepository chapterRepository;
 
     @GetMapping(value = "/all")
     public String showAll(Model model) {
@@ -74,11 +76,9 @@ public class CharacController {
     @GetMapping("/{id}")
     public String characterProfile(@PathVariable("id") long id, Model model) {
         Charac charac = characRepository.findCharacById(id);
-        List<EventDate> eventDateList = dateRepository.getEventDatesByType(EventType.BIRTH);
-        model.addAttribute("birth", eventDateList.listIterator().next().getShortForm());
         model.addAttribute("character", charac);
         model.addAttribute("all", characRepository.findAll());
-//        System.out.println(eventDateList.listIterator().next().getShortForm());
+        model.addAttribute("chapters", chapterRepository.findAll());
         return "character/character-profile";
     }
 
