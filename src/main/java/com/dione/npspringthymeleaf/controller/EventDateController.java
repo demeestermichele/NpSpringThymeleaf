@@ -36,7 +36,6 @@ public class EventDateController {
         model.addAttribute("dates", repository.findAll());
         return "date/date-dashboard";
     }
-
     @GetMapping(value = "/timeline")
     public String timeline(Model model) {
         model.addAttribute("dates", repository.findAll());
