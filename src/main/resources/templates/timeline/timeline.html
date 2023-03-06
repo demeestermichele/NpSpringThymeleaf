@@ -36,16 +36,31 @@
     </div>
 </nav>
 <!--start of timeline loop-->
-<div>
-    <div th:each="i : ${#numbers.sequence(1, 12)}" th:value="${i}"
-         th:utext="'No.' + '<b>' + ${i} + '</b><p id=\'id' + ${i} + '\'> this is a paragraph ' + ${i} + '</p>'">
-    </div>
+<div class="timeline">
+    <div class="container" th:each="i, iStat : ${dates}" th:id="${#ids.seq(i.id)}"
+         th:classappend="${iStat.odd}? 'left': 'right'">
+        <div class="content" th:utext="'<h2>' + ${i.years} + '</h2><span> date: ' + ${i} + ' type: ' + ${i.type} + '</span> name: '+ ${i.name} + ' '">
 
+        </div>
+        <br/>
+    </div>
+</div>
+<div>
+    <div>Title</div>
 </div>
 <div>
     <div>
+        <div>
+            <h2>2017</h2>
+            <p>Lorem ipsum..</p>
+        </div>
     </div>
-    <div>Title</div>
+    <div class="container right">
+        <div class="content">
+            <h2>2016</h2>
+            <p>Lorem ipsum..</p>
+        </div>
+    </div>
 </div>
 </body>
 </html>

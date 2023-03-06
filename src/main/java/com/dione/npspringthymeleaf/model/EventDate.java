@@ -3,7 +3,6 @@ package com.dione.npspringthymeleaf.model;
 import com.dione.npspringthymeleaf.model.conversions.Conversion;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,7 +36,7 @@ public class EventDate extends CalendarType {
     public EventDate() {
     }
 
-    public EventDate(Integer years, Integer months, Integer days){
+    public EventDate(Integer years, Integer months, Integer days) {
         this.setYears(years);
         this.setMonths(months);
         this.setDays(days);
@@ -97,16 +96,29 @@ public class EventDate extends CalendarType {
         this.duration = duration;
     }
 
-    public double getShortForm() {
-        return shortForm;
+
+    public Set<Charac> getCharacters() {
+        return characters;
     }
 
+    public void setCharacters(Set<Charac> characters) {
+        this.characters = characters;
+    }
+
+    /**
+     * @param shortForm takes the long dates and converts to short date using coversion class
+     */
     public void setShortForm(double shortForm) {
         Conversion conversion = new Conversion();
         shortForm = conversion.processToShortDate(
-                  new EventDate(this.getYears(), this.getMonths(), this.getDays()),
-                  new CalendarType(super.getYears(), super.getMonths(), super.getDays()
-                  ));
+                new EventDate(this.getYears(), this.getMonths(), this.getDays()),
+                new CalendarType(super.getYears(), super.getMonths(), super.getDays()
+                ));
+        this.shortForm = shortForm;
+    }
+
+    public double getShortForm() {
+        return shortForm;
     }
 
     @Override
@@ -114,10 +126,22 @@ public class EventDate extends CalendarType {
 //        DecimalFormat days = new DecimalFormat("##");
 //        DecimalFormat months = new DecimalFormat("##");
 //        DecimalFormat years = new DecimalFormat("####");
+        Integer d = super.getDays();
+        if (d != null)
+            d = super.getDays();
+        else d = 0;
+        Integer m = super.getDays();
+        if (m != null)
+            m = super.getMonths();
+        else m = 0;
+        Integer y = super.getDays();
+        if (y != null)
+            y = super.getYears();
+        else y = 0;
         return
 //                "Event long date: " +
-                Math.round(super.getDays()) + "." +
-                Math.round(super.getMonths()) + "." +
-                Math.round(super.getYears());
+                Math.round(d) + "." +
+                        Math.round(m) + "." +
+                        Math.round(y);
     }
 }
