@@ -38,7 +38,7 @@ public class EventDateController {
     }
     @GetMapping(value = "/timeline")
     public String timeline(Model model) {
-        List<EventDate> list = repository.findAll(Sort.by("years"));
+        List<EventDate> list = repository.findAll(Sort.by("years").and(Sort.by("months").and(Sort.by("days"))));
         model.addAttribute("dates", list);
         System.out.println(list);
         return "timeline/timeline";
